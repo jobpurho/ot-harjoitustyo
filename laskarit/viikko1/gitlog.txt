@@ -1,0 +1,123 @@
+commit 2985ebbda4e2e736644f1f8adcd1707e5a3567b7
+Author: Josi Purhonen <josi.purhonen@helsinki.fi>
+Date:   Tue Oct 29 13:03:44 2019 +0200
+
+    uudelleennimetty
+
+ tiedostoja/file22 | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit c38501a4d7614d2436e8a066b598a775d1558fcd
+Author: Josi Purhonen <josi.purhonen@helsinki.fi>
+Date:   Tue Oct 29 13:02:48 2019 +0200
+
+    uudelleennimetty ja poistettu
+
+ tiedostoja/file1 | 0
+ tiedostoja/file2 | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit b2323defe13546d25a7744fb3b37f2d5550e1d43
+Author: Josi Purhonen <josi.purhonen@helsinki.fi>
+Date:   Tue Oct 29 12:58:18 2019 +0200
+
+    lisätty tiedostoja
+
+ tiedostoja/file1 | 0
+ tiedostoja/file2 | 0
+ tiedostoja/file3 | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 8d195163ffb4d4a5779fc1112db7e909e74f5087
+Author: Josi Purhonen <josi.purhonen@helsinki.fi>
+Date:   Tue Oct 29 12:28:14 2019 +0200
+
+    muokattu ekaa ja kolmatta
+
+ eka.txt    | 3 ++-
+ kolmas.txt | 3 ++-
+ 2 files changed, 4 insertions(+), 2 deletions(-)
+
+commit d1424dd648bc4d662b30a6048b000f7764f42cde
+Author: Josi Purhonen <josi.purhonen@helsinki.fi>
+Date:   Tue Oct 29 12:25:10 2019 +0200
+
+    nimetty uudelleen
+
+ tiedosto.txt => eka.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 92165f67843571469fa0e8977d043e240e705b49
+Author: Josi Purhonen <josi.purhonen@helsinki.fi>
+Date:   Tue Oct 29 12:23:07 2019 +0200
+
+    poistettu toinen.txt
+
+ toinen.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+commit fc63264392111691cf7231bd867313c58ecb1e73
+Author: Josi Purhonen <josi.purhonen@helsinki.fi>
+Date:   Tue Oct 29 12:17:29 2019 +0200
+
+    muokattu
+
+ tiedosto.txt | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+commit b4998d06484f17b4f9f7863758a3aef4da749878
+Author: Josi Purhonen <josi.purhonen@helsinki.fi>
+Date:   Tue Oct 29 12:15:32 2019 +0200
+
+    lisätty tekstiä
+
+ tiedosto.txt | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+
+commit a2de3dc6ad6d5cd72faaf386b02639a9a5f46554
+Author: Josi Purhonen <josi.purhonen@helsinki.fi>
+Date:   Tue Oct 29 12:10:48 2019 +0200
+
+    lisätty hakemisto ja tiedosto
+
+ stuff/stuff.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 4fbf8bab58e6dcab9a17554a2d763ffb340168e0
+Author: Josi Purhonen <josi.purhonen@helsinki.fi>
+Date:   Tue Oct 29 12:08:40 2019 +0200
+
+    muokattu
+
+ kolmas.txt | 1 +
+ toinen.txt | 1 +
+ 2 files changed, 2 insertions(+)
+
+commit 9a8e508f9f366d34a5615c178919bcaf7d23bb0a
+Author: Josi Purhonen <josi.purhonen@helsinki.fi>
+Date:   Tue Oct 29 12:06:42 2019 +0200
+
+    kolmas.txt lisätty
+
+ kolmas.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 5196f9eb04d329a0455268473a002c5d7c9242ad
+Author: Josi Purhonen <josi.purhonen@helsinki.fi>
+Date:   Tue Oct 29 12:01:31 2019 +0200
+
+    muutos ja lisäys
+
+ tiedosto.txt | 1 +
+ toinen.txt   | 0
+ 2 files changed, 1 insertion(+)
+
+commit 08a3ed1eaf8df7bf31748890792efe4cea6b8f2e
+Author: Josi Purhonen <josi.purhonen@helsinki.fi>
+Date:   Tue Oct 29 11:58:44 2019 +0200
+
+    tiedosto.txt luotu
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
