@@ -1,11 +1,10 @@
-## Ohjelmistotekniikka, harjoitustyö
+# Ohjelmistotekniikka, harjoitustyö
 
 Tähän repositorioon palautan kurssin *Ohjelmistotekniikka* harjoitustehtäviä.
 
 **Repositorio täydentyy kurssin edetessä**
 
-Tehtävät
-======
+# Tehtävät
 
 #### Viikko1
 
