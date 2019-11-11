@@ -17,5 +17,7 @@ Tähän repositorioon palautan kurssin *Ohjelmistotekniikka* harjoitustehtäviä
 [viikko2](https://github.com/jobpurho/ot-harjoitustyo/tree/master/laskarit/viikko2)
 
 # Dokumentaatio
+
 [vaatimusmaarittely](https://github.com/jobpurho/ot-harjoitustyo/tree/master/dokumentointi/vaatimusmaarittely.md)
+
 [työaikakirjanpito](https://github.com/jobpurho/ot-harjoitustyo/tree/master/dokumentointi/tuntikirjanpito.md)
