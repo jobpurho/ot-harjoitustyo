@@ -4,17 +4,9 @@ Tähän repositorioon palautan kurssin *Ohjelmistotekniikka* harjoitustehtäviä
 
 **Repositorio täydentyy kurssin edetessä**
 
-# Laskarit
+# WordApp
 
-### Viikko1
-
-[gitlog.txt](https://github.com/jobpurho/ot-harjoitustyo/blob/master/laskarit/viikko1/gitlog.txt)
-
-[komentorivi.txt](https://github.com/jobpurho/ot-harjoitustyo/blob/master/laskarit/viikko1/komentorivi.txt)
-
-### Viikko2
-
-[viikko2](https://github.com/jobpurho/ot-harjoitustyo/tree/master/laskarit/viikko2)
+Sovellus mahdollistaa muinaiskreikan sanaston opiskelun. Maven-projekti löytyy sijainnista [WordApp](https://github.com/jobpurho/ot-harjoitustyo/tree/master/WordApp).
 
 # Dokumentaatio
 
