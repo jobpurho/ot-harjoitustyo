@@ -1,67 +1,55 @@
 package wordapp.domain;
 
+import wordapp.dao.*;
 import java.util.*;
 
 public class WordStudy {
     
-    private ArrayList<String> keys;
-    private HashMap<String, String[]> dictionary;
     private Random random;
     private int index;
-    private String currentMeanings;
+    private Lexicon lexicon;
+    private StringComparison comparison;
+    private LexiconDao ld;
     
-    public WordStudy(HashMap dictionary) {
+    public WordStudy(LexiconDao ld) {
+        this.ld = ld;
+        lexicon = new Lexicon(ld);
         random = new Random();
-        this.dictionary = dictionary;
-        this.keys = new ArrayList<String>(dictionary.keySet());
-        currentMeanings = null;
+        comparison = new StringComparison();
     }
     
-    public String giveNextWord() {
-        if (this.keys.size()==0) {
-            return null;
+    public void chooseNextWord() {
+        if (!lexicon.isEmpty()) {
+            index = random.nextInt(lexicon.returnKeys().size());        
         }
-        index = random.nextInt(this.keys.size());
-        String word = this.keys.get(index);
-        return word;
     }
     
     public boolean isCorrect(String answer) {
-        String word = keys.get(index);
-        currentMeanings = String.join(", ", dictionary.get(keys.get(index)));
-        for (String translation:this.dictionary.get(word)) {
-            if (answer.equals(translation)) {
-                removeWord();
-                return true;
-            }
+        String[] meanings = lexicon.returnMeanings(index);
+        if (comparison.isSimilar(answer, meanings)) {
+            lexicon.removeWord(index);
+            return true;
         }
         return false;
     }
-    
-    private void removeWord() {
-        dictionary.remove(keys.get(index));
-        keys.remove(index);
-    }
 
-    public HashMap returnDictionary() {
-        return this.dictionary;
+    public String returnCurrentWordAsString() {
+        if (lexicon.isEmpty()) {
+            return null;
+        }
+        return lexicon.getWord(index);
     }
     
-    public ArrayList returnKeys() {
-        return this.keys;
-    }
-    
-    public String returnCurrentKey() {
-        return keys.get(index);
-    }
-
-    public String[] returnCurrentMeanings() {
-        return dictionary.get(keys.get(index));
-    }
-    
-        
     public String returnCurrentMeaningsAsString() {
-        return currentMeanings;
+        return String.join(", ", lexicon.returnMeanings(index));
     }
     
+    public void quitWordStudy() {
+        if (lexicon.isEmpty()) {
+            ld.removeFile();
+        } else {
+            ld.setFileContent(lexicon.returnContent());
+            ld.save();            
+        }
+    }
 }

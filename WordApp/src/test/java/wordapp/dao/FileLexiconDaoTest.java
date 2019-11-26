@@ -1,4 +1,4 @@
-package wordapp.domain;
+package wordapp.dao;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -6,19 +6,14 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import java.util.*;
 
-public class WordStudyTest {
+public class FileLexiconDaoTest {
     
-    WordStudy study;
-    
-    public WordStudyTest() {
-
+    public FileLexiconDaoTest() {
     }
     
     @BeforeClass
     public static void setUpClass() {
-
     }
     
     @AfterClass
@@ -32,6 +27,4 @@ public class WordStudyTest {
     @After
     public void tearDown() {
     }
-    
-
 }

@@ -5,12 +5,12 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class FileWordApp {
+public class OriginalLexicon {
     
     private String file;
     private HashMap<String, String[]> lines;
     
-    public FileWordApp(String file) {
+    public OriginalLexicon(String file) {
         this.file = file;
         this.lines = new HashMap<>();
         

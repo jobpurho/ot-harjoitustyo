@@ -6,19 +6,14 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import java.util.*;
 
-public class WordStudyTest {
+public class LexiconTest {
     
-    WordStudy study;
-    
-    public WordStudyTest() {
-
+    public LexiconTest() {
     }
     
     @BeforeClass
     public static void setUpClass() {
-
     }
     
     @AfterClass
@@ -32,6 +27,5 @@ public class WordStudyTest {
     @After
     public void tearDown() {
     }
-    
 
 }
