@@ -52,4 +52,8 @@ public class WordStudy {
             ld.save();            
         }
     }
+    
+    public int returnIndex() {
+        return index;
+    }
 }

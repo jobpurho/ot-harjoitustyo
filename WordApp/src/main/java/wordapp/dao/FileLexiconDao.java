@@ -58,8 +58,4 @@ public class FileLexiconDao implements LexiconDao {
     public void setFileContent(HashMap newFileContent) {
         fileContent = newFileContent;
     }
-    
-    public void removeSaved() {
-        
-    }
 }
