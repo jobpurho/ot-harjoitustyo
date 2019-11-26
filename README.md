@@ -10,6 +10,8 @@ Sovellus mahdollistaa muinaiskreikan sanaston opiskelun. Maven-projekti löytyy 
 
 # Dokumentaatio
 
-[vaatimusmaarittely](https://github.com/jobpurho/ot-harjoitustyo/tree/master/dokumentointi/vaatimusmaarittely.md)
+[Vaatimusmaarittely](https://github.com/jobpurho/ot-harjoitustyo/tree/master/dokumentointi/vaatimusmaarittely.md)
 
-[työaikakirjanpito](https://github.com/jobpurho/ot-harjoitustyo/tree/master/dokumentointi/tuntikirjanpito.md)
+[Työaikakirjanpito](https://github.com/jobpurho/ot-harjoitustyo/tree/master/dokumentointi/tuntikirjanpito.md)
+
+[Arkkitehtuurikuvaus](https://github.com/jobpurho/ot-harjoitustyo/tree/master/dokumentointi/arkkitehtuuri.md)
