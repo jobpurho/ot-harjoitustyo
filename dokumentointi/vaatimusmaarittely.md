@@ -8,10 +8,10 @@ Sovellus on tarkoitettu teologeille klassisten kielten sanaston opiskelua varten
 Sovelluksella on vain yhdenlaisia käyttäjiä.
 
 ## Perusversion toiminnallisuus
-- Käyttäjä voi valita, aloittaako opiskelun alusta vai jatkaako siitä, mihin viimeksi jäi
-- Käyttäjä antaa käännösehdotuksen ja ohjelma kertoo, onko se oikein. Jos se ei ole oikein, mahdolliset oikeat vastaukset näytetään ja sanaa kysytään myöhemmin uudestaan.
-- Käyttäjä voi tallentaa tilanteen niin, että seuraavalla kerralla sovelluksen avatessa hänellä on opiskeltavana viime kerran oikeiden vastausten rajaama sanasto.
-- Perusversiossa on tekstikäyttöliittymä
+- Käyttäjä voi valita, aloittaako opiskelun alusta vai jatkaako siitä, mihin viimeksi jäi (tehty)
+- Käyttäjä antaa käännösehdotuksen ja ohjelma kertoo, onko se oikein. Jos se ei ole oikein, mahdolliset oikeat vastaukset näytetään ja sanaa kysytään myöhemmin uudestaan. (tehty)
+- Käyttäjä voi tallentaa tilanteen niin, että seuraavalla kerralla sovelluksen avatessa hänellä on opiskeltavana viime kerran oikeiden vastausten rajaama sanasto. (tehty)
+- Perusversiossa on tekstikäyttöliittymä. (tehty)
 
 ## Jatkokehitys
 
