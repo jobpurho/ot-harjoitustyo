@@ -39,7 +39,18 @@ public class Ui {
             String answer = scanner.nextLine();
             
             if (answer.equals("q")) {
-                study.quitWordStudy();
+                System.out.println("save? y=yes, n=no");
+                while (true) {
+                    String save = scanner.nextLine();
+                    if (save.equals("y")) {
+                        study.quitWordStudy();
+                        break;
+                    }
+                    if (save.equals("n")) {
+                        break;
+                    }
+                }
+                
                 break;
             }
             String currentMeanings = study.returnCurrentMeaningsAsString();
