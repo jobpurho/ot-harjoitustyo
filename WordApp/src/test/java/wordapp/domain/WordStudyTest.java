@@ -7,15 +7,17 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import java.util.*;
-import wordapp.dao.FileLexiconDao;
+import wordapp.dao.*;
 
 public class WordStudyTest {
     
     WordStudy study;
     
     public WordStudyTest() {
-        FileLexiconDao fldao = new FileLexiconDao("saves.ser","file.txt");
-        study = new WordStudy(fldao);
+        LexiconDao lexDao = new FileLexiconDao("saved.ser");
+        OriginalLexicon lexicon = new FileOriginalLexicon("file.txt");
+        lexDao.setFileContent(lexicon.returnFileContent());
+        study = new WordStudy(lexDao);
     }
     
     @BeforeClass

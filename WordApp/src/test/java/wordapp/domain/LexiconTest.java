@@ -7,15 +7,19 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import wordapp.dao.FileLexiconDao;
+import wordapp.dao.FileOriginalLexicon;
+import wordapp.dao.LexiconDao;
+import wordapp.dao.OriginalLexicon;
 
 public class LexiconTest {
     
     Lexicon lexicon;
     
     public LexiconTest() {
-
-        FileLexiconDao ld = new FileLexiconDao("test.ser", "file.txt");
-        lexicon = new Lexicon(ld);
+        LexiconDao lexDao = new FileLexiconDao("saved.ser");
+        OriginalLexicon lexicon = new FileOriginalLexicon("file.txt");
+        lexDao.setFileContent(lexicon.returnFileContent());
+        this.lexicon = new Lexicon(lexDao);
     }
     
     @BeforeClass

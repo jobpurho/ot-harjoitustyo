@@ -14,7 +14,7 @@ public class FileLexiconDaoTest {
     FileLexiconDao fldao;
     
     public FileLexiconDaoTest() {
-        fldao = new FileLexiconDao("test.ser", "file.txt");
+        fldao = new FileLexiconDao("test.ser");
     }
     
     @BeforeClass
