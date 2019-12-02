@@ -12,7 +12,7 @@ public class Ui {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);   
-        FileLexiconDao ld = returnWords(scanner);
+        LexiconDao ld = returnWords(scanner);
         WordStudy study = new WordStudy(ld);
         studyWords(study, scanner);
         
@@ -65,8 +65,11 @@ public class Ui {
     
     static FileLexiconDao returnWords(Scanner scanner) {
         String savedFile = "saved.ser";
-        String originalFile = "file.txt";
-
-        return new FileLexiconDao(savedFile, originalFile);
+        FileLexiconDao fld =  new FileLexiconDao(savedFile);
+        if (!new File("saved.ser").exists()) {
+            HashMap fileContent = new FileMounceDictionary("dictionary.txt").returnFileContent();
+            fld.setFileContent(fileContent);
+        }
+        return fld;
     }
 }

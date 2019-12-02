@@ -13,12 +13,10 @@ public class FileLexiconDao implements LexiconDao {
     private HashMap fileContent;
     private String savedFileName;
     
-    public FileLexiconDao(String savedFileName, String originalFileName) {
+    public FileLexiconDao(String savedFileName) {
         this.savedFileName = savedFileName;
         if (new File(savedFileName).exists()) {
             fileContent = readSaved();
-        } else {
-            fileContent = new OriginalLexicon(originalFileName).returnFileContent();
         }        
     }
     
