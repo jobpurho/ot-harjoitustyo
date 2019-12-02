@@ -15,6 +15,8 @@ public class FileLexiconDaoTest {
     
     public FileLexiconDaoTest() {
         fldao = new FileLexiconDao("test.ser");
+        OriginalLexicon lexicon = new FileOriginalLexicon("file.txt");
+        fldao.setFileContent(lexicon.returnFileContent());
     }
     
     @BeforeClass
@@ -33,11 +35,4 @@ public class FileLexiconDaoTest {
     public void tearDown() {
     }
     
-    @Test
-    public void saveCreatesAndRemoveRemovesFile() {
-        fldao.save();
-        assertTrue(new File("test.ser").exists());
-        fldao.removeFile();
-        assertTrue(!new File("test.ser").exists());
-    }
 }
