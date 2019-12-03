@@ -30,12 +30,12 @@ testit:
 mvn test
 ```
 
-testikattavuus.
+testikattavuus:
 ```
-mvn:jacoco:report
+mvn jacoco:report
 ```
 
-jarin generointi
+jarin generointi:
 ```
 mvn package
 ```
