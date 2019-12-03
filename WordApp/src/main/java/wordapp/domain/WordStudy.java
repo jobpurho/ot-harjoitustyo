@@ -10,6 +10,7 @@ public class WordStudy {
     private Lexicon lexicon;
     private StringComparison comparison;
     private LexiconDao ld;
+    private boolean answered = false;
     
     public WordStudy(LexiconDao ld) {
         this.ld = ld;
@@ -19,12 +20,14 @@ public class WordStudy {
     }
     
     public void chooseNextWord() {
+        answered = false;
         if (!lexicon.isEmpty()) {
             index = random.nextInt(lexicon.returnKeys().size());        
         }
     }
     
     public boolean isCorrect(String answer) {
+        answered = true;
         String[] meanings = lexicon.returnMeanings(index);
         if (comparison.isSimilar(answer, meanings)) {
             lexicon.removeWord(index);
@@ -41,7 +44,11 @@ public class WordStudy {
     }
     
     public String returnCurrentMeaningsAsString() {
-        return String.join(", ", lexicon.returnMeanings(index));
+        String meanings = String.join(", ", lexicon.returnMeanings(index));
+        if (meanings.length()>100) {
+            meanings = meanings.substring(0,100);
+        }
+        return meanings;
     }
     
     public void quitWordStudy() {
@@ -51,6 +58,10 @@ public class WordStudy {
             ld.setFileContent(lexicon.returnContent());
             ld.save();            
         }
+    }
+    
+    public boolean answered() {
+        return answered;
     }
     
     public int returnIndex() {
