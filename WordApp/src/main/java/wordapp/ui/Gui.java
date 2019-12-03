@@ -7,6 +7,8 @@ import java.io.File;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
 import javafx.scene.Scene;
@@ -30,8 +32,9 @@ public class Gui extends Application {
     @Override
     public void start(Stage primaryStage) {
         //main scene
-        VBox startPage = new VBox();            
-        Button createNewStudyButton = new Button("New");     
+        HBox startPage = new HBox();   
+        startPage.setAlignment(Pos.CENTER);
+        Button createNewStudyButton = new Button("New study");     
         createNewStudyButton.setOnAction(e->{
             primaryStage.setScene(createScene);
             }
@@ -51,8 +54,11 @@ public class Gui extends Application {
 
         
         //create new study -scene
-        VBox newStudyPane = new VBox();            
-        Label inputLabel = new Label("How many most common words?");
+        VBox newStudyPane = new VBox();         
+        newStudyPane.setAlignment(Pos.CENTER);
+        Label inputLabel = new Label("You can limit the vocabulary to the most common words.\n"
+                + "For example, if you type '100', you will study only the 100 most frequent words.");
+        Label readingError = new Label("");
         TextField numberInput = new TextField();
         Label check = new Label("");
         Button startNew = new Button("Start!");     
@@ -61,18 +67,18 @@ public class Gui extends Application {
                 createNew(Integer.parseInt(numberInput.getText()));            
                 primaryStage.setScene(studyScene);                
             } else {
-                inputLabel.setText("How many most common words? PLEASE ENTER AN INTEGER");
+                readingError.setText("PLEASE ENTER AN INTEGER");
             }
 
         });
-        newStudyPane.getChildren().addAll(inputLabel, numberInput, startNew);
+        newStudyPane.getChildren().addAll(inputLabel, readingError, numberInput, startNew);
         createScene = new Scene(newStudyPane, 500, 500);
         
 
         //study scene
         
         VBox study = new VBox();            
-        
+        study.setAlignment(Pos.CENTER);
         Label answerInputLabel = new Label("Click next to start learning greek vocabulary!");
         
         TextField answerInput = new TextField();
@@ -90,7 +96,8 @@ public class Gui extends Application {
                     definition.setText("\n the correct meanings of the word " + greekWord +  ":\n" + wordStudy.returnCurrentMeaningsAsString() + "...");
                 }                       
      
-            }                      
+            }           
+            answerInput.setText("");
         });
         next.setOnAction(e->{
             setNext();
@@ -100,7 +107,8 @@ public class Gui extends Application {
                 answerInputLabel.setText("You have studied all the words!");
             } else {
                 answerInputLabel.setText("What is the meaning of the word " + greekWord); 
-            }              
+            }         
+            answerInput.setText("");
         });
         
         saveAndQuit.setOnAction(e->{
@@ -111,7 +119,8 @@ public class Gui extends Application {
         studyScene = new Scene(study, 500, 500);        
         
         //stage        
-        primaryStage.setScene(firstScene);        
+        primaryStage.setScene(firstScene);  
+        primaryStage.setTitle("WordApp");
         primaryStage.show();
     }
     

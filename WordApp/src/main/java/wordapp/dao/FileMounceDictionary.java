@@ -9,7 +9,7 @@ import java.io.*;
 
 public class FileMounceDictionary implements OriginalLexicon {
 
-    private TreeMap<Integer, String> lines;
+    private TreeMap<Integer, ArrayList<String>> lines;
     private HashMap<String, String[]> translations;
     private HashMap<String, String[]> fileContent;
     private int number;
@@ -49,7 +49,10 @@ public class FileMounceDictionary implements OriginalLexicon {
                 
         else if (line.substring(0,5).equals("<def>")) {
             String[] translations = editTranslations(line);
-            lines.put(number, greekWord);
+            if (!lines.containsKey(number)) {
+                lines.put(number, new ArrayList<>());
+            }
+            lines.get(number).add(greekWord);
             this.translations.put(greekWord, translations);
         }
     }
@@ -70,11 +73,14 @@ public class FileMounceDictionary implements OriginalLexicon {
     
     public void filterTopWords(int number) {
         for (int i=0;i<number;i++) {
-            fileContent.put(lines.get(lines.lastKey()), translations.get(lines.get(lines.lastKey())));
+            ArrayList<String> greekWords  = lines.get(lines.lastKey());
+            for (String j:greekWords) {
+                fileContent.put(j, translations.get(j));
+                i++;
+            }
             lines.pollLastEntry();
         }
-        filtered = true;
-    
+        filtered = true;    
     }
     
     public HashMap returnFileContent() {
