@@ -18,10 +18,12 @@ public class StringComparison {
     }    
     
     double similarity(String answerString, String correctString) {
-        if (answerString.equals(correctString)) {
+        String answerStringLower = answerString.toLowerCase();
+        String correctStringLower = correctString.toLowerCase();
+        if (answerStringLower.equals(correctStringLower)) {
             return 100;
         }
-        if (skipPreEquals(answerString, correctString)) {
+        if (skipPreEquals(answerStringLower, correctStringLower)) {
             return 100;
         }
         return levensthein();
