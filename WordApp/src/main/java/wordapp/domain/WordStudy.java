@@ -35,6 +35,10 @@ public class WordStudy {
         }
         return false;
     }
+    
+    public boolean spellingMistake() {
+        return comparison.spellingMistake();
+    }
 
     public String returnCurrentWordAsString() {
         if (lexicon.isEmpty()) {

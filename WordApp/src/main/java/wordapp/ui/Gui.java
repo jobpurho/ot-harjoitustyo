@@ -25,6 +25,7 @@ public class Gui extends Application {
     private WordStudy wordStudy;
     private LexiconDao lexiconDao;
     private String greekWord = "First";
+    private boolean spellingMistake;
     
     private Timer timer;
     private boolean first;
@@ -90,10 +91,14 @@ public class Gui extends Application {
         answer.setOnAction(e-> {            
             if (greekWord != null && !wordStudy.answered()) {
                 String meanings = wordStudy.returnCurrentMeaningsAsString();
-                if (checkAnswer(answerInput.getText())) {                    
-                    correct.setText("Correct!");   
+                String spelling = "";
+                if (checkAnswer(answerInput.getText())) {   
+                    if (wordStudy.spellingMistake()) {
+                        spelling = " There was propably a spelling mistake.";
+                    }
+                    correct.setText("Correct!" + spelling);   
                     definition.setText("\nDefinition of the word " + greekWord +  ":\n" + meanings + "...");
-                } else if (!greekWord.equals("First")) {                   
+                } else if (!greekWord.equals("First")) {      
                     correct.setText("Wrong answer");  
                     definition.setText("\nDefinition of the word " + greekWord +  ":\n" + meanings + "...");
                 }                       
@@ -135,12 +140,13 @@ public class Gui extends Application {
         if (wordStudy.isCorrect(answer)) {
             return true;
         }
+        spellingMistake = false;
         return false;
     }
     
     public void setNext() {
         this.wordStudy.chooseNextWord();   
-        greekWord = this.wordStudy.returnCurrentWordAsString();
+        greekWord = this.wordStudy.returnCurrentWordAsString();        
     }
     
     public boolean savedExists() {
