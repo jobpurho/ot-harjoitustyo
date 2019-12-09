@@ -89,11 +89,13 @@ public class Gui extends Application {
         Label definition = new Label("");
         answer.setOnAction(e-> {            
             if (greekWord != null && !wordStudy.answered()) {
+                String meanings = wordStudy.returnCurrentMeaningsAsString();
                 if (checkAnswer(answerInput.getText())) {                    
-                    correct.setText("Correct!");    
+                    correct.setText("Correct!");   
+                    definition.setText("\nDefinition of the word " + greekWord +  ":\n" + meanings + "...");
                 } else if (!greekWord.equals("First")) {                   
                     correct.setText("Wrong answer");  
-                    definition.setText("\n the correct meanings of the word " + greekWord +  ":\n" + wordStudy.returnCurrentMeaningsAsString() + "...");
+                    definition.setText("\nDefinition of the word " + greekWord +  ":\n" + meanings + "...");
                 }                       
      
             }           
