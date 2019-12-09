@@ -38,7 +38,7 @@
                 <configuration>
                     <excludes>
                         <exclude>wordapp/ui/*</exclude>
-                        <exclude>wordapp/*</exclude>
+                        <exclude>wordapp/Main.java</exclude>
                     </excludes>
                 </configuration>
                 <executions>
