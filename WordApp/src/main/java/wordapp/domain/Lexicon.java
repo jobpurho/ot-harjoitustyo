@@ -32,7 +32,7 @@ public class Lexicon {
     }
     
     public boolean isEmpty() {
-        if (this.keys.size()==0) {
+        if (this.keys.size() == 0) {
             return true;
         }
         return false;

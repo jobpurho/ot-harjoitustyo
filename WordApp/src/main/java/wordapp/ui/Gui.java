@@ -35,13 +35,13 @@ public class Gui extends Application {
         HBox startPage = new HBox();   
         startPage.setAlignment(Pos.CENTER);
         Button createNewStudyButton = new Button("New study");     
-        createNewStudyButton.setOnAction(e->{
+        createNewStudyButton.setOnAction(e-> {
             primaryStage.setScene(createScene);
             }
         );        
         if (savedExists()) {
             Button returnToSavedButton = new Button("Return to saved");  
-            returnToSavedButton.setOnAction(e->{
+            returnToSavedButton.setOnAction(e-> {
                 load();
                 primaryStage.setScene(studyScene);
                 }
@@ -62,7 +62,7 @@ public class Gui extends Application {
         TextField numberInput = new TextField();
         Label check = new Label("");
         Button startNew = new Button("Start!");     
-        startNew.setOnAction(e->{        
+        startNew.setOnAction(e-> {        
             if (readInteger(numberInput.getText())) {
                 createNew(Integer.parseInt(numberInput.getText()));            
                 primaryStage.setScene(studyScene);                
@@ -87,11 +87,11 @@ public class Gui extends Application {
         Button saveAndQuit = new Button("save and quit");
         Label correct = new Label("");
         Label definition = new Label("");
-        answer.setOnAction(e->{            
-            if (greekWord!=null&&!wordStudy.answered()) {
+        answer.setOnAction(e-> {            
+            if (greekWord != null && !wordStudy.answered()) {
                 if (checkAnswer(answerInput.getText())) {                    
                     correct.setText("Correct!");    
-                } else if (!greekWord.equals("First")){                   
+                } else if (!greekWord.equals("First")) {                   
                     correct.setText("Wrong answer");  
                     definition.setText("\n the correct meanings of the word " + greekWord +  ":\n" + wordStudy.returnCurrentMeaningsAsString() + "...");
                 }                       
@@ -99,11 +99,11 @@ public class Gui extends Application {
             }           
             answerInput.setText("");
         });
-        next.setOnAction(e->{
+        next.setOnAction(e-> {
             setNext();
             correct.setText("");
             definition.setText("");
-            if (greekWord==null) {
+            if (greekWord == null) {
                 answerInputLabel.setText("You have studied all the words!");
             } else {
                 answerInputLabel.setText("What is the meaning of the word " + greekWord); 
@@ -111,7 +111,7 @@ public class Gui extends Application {
             answerInput.setText("");
         });
         
-        saveAndQuit.setOnAction(e->{
+        saveAndQuit.setOnAction(e-> {
             saveAndExit();
             
         });

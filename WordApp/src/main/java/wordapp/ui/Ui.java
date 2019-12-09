@@ -28,7 +28,7 @@ public class Ui {
             
             study.chooseNextWord();
             String word = study.returnCurrentWordAsString();
-            if (word==null) {
+            if (word == null) {
                 study.quitWordStudy();
                 System.out.println("You have studied all the words");
                 break;

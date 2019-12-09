@@ -36,4 +36,20 @@ public class FileMounceDictionaryTest {
     public void fileContentIsNotEmpty() {
         assertTrue(mounce.returnFileContent().size()>0);
     }
+    
+    @Test
+    public void fileContentSizeIsCorrectAfterFiltering() {
+        mounce = new FileMounceDictionary("dictionary.txt");
+        mounce.filterTopWords(10);
+        assertTrue(mounce.returnFileContent().size()==10);
+        mounce = new FileMounceDictionary("dictionary.txt");
+        mounce.filterTopWords(100);
+        assertTrue(mounce.returnFileContent().size()==100);
+        mounce = new FileMounceDictionary("dictionary.txt");
+        mounce.filterTopWords(200);
+        assertTrue(mounce.returnFileContent().size()==200);
+        mounce = new FileMounceDictionary("dictionary.txt");
+        mounce.filterTopWords(1000);
+        assertTrue(mounce.returnFileContent().size()==1000);
+    }
 }

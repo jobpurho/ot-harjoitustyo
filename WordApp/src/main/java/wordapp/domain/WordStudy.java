@@ -29,7 +29,7 @@ public class WordStudy {
     public boolean isCorrect(String answer) {
         answered = true;
         String[] meanings = lexicon.returnMeanings(index);
-        if (comparison.isSimilar(answer, meanings)) {
+        if (comparison.isSimilarEnough(answer, meanings)) {
             lexicon.removeWord(index);
             return true;
         }
@@ -45,8 +45,8 @@ public class WordStudy {
     
     public String returnCurrentMeaningsAsString() {
         String meanings = String.join(", ", lexicon.returnMeanings(index));
-        if (meanings.length()>100) {
-            meanings = meanings.substring(0,100);
+        if (meanings.length() > 100) {
+            meanings = meanings.substring(0, 100);
         }
         return meanings;
     }

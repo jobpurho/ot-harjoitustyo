@@ -19,15 +19,13 @@ public class FileMounceDictionary implements OriginalLexicon {
     public FileMounceDictionary(String mounceFile) {
         lines = new TreeMap<>();
         translations = new HashMap<>();
-        fileContent = new HashMap<>();
         try {
             Scanner fileReader = new Scanner(new File(mounceFile)); 
-            while(fileReader.hasNextLine()) {
+            while (fileReader.hasNextLine()) {
                 String line = fileReader.nextLine();
-                if (line.length()<5) {
+                if (line.length() < 5) {
                     continue;
-                }
-                else {
+                } else {
                     filter(line);
                 }
             }
@@ -40,17 +38,14 @@ public class FileMounceDictionary implements OriginalLexicon {
         
         if (line.matches(".*[0-9]x .*")) {
             String[] parts = line.split("x ");
-        }
-        else if (line.substring(0,3).equals("GK ")) {
+        } else if (line.substring(0 , 3).equals("GK ")) {
             String[] parts = line.split(" ");
-            number = Integer.parseInt(parts[parts.length-1].replaceAll("[x,]", ""));
+            number = Integer.parseInt(parts[parts.length - 1].replaceAll("[x,]" , ""));
             greekWord = parts[3];
-        }
-                
-        else if (line.substring(0,5).equals("<def>")) {
+        } else if (line.substring(0, 5).equals("<def>")) {
             String[] translations = editTranslations(line);
             if (!lines.containsKey(number)) {
-                lines.put(number, new ArrayList<>());
+                lines.put(number , new ArrayList<>());
             }
             lines.get(number).add(greekWord);
             this.translations.put(greekWord, translations);
@@ -67,25 +62,34 @@ public class FileMounceDictionary implements OriginalLexicon {
         translation = translation.replaceAll(";;* *", ","); 
         translation = translation.replaceAll("(,,* *)(,,* *)*", ","); 
         translation = translation.replace("(x)", "");
-        translation = translation.substring(0,translation.length()-1);
+        translation = translation.substring(0, translation.length() - 1);
         return translation.split(",");
     }
     
     public void filterTopWords(int number) {
-        for (int i=0;i<number;i++) {
-            ArrayList<String> greekWords  = lines.get(lines.lastKey());
-            for (String j:greekWords) {
-                fileContent.put(j, translations.get(j));
+        TreeMap<Integer, ArrayList<String>> linesCopy = new TreeMap<>(lines);
+        fileContent = new HashMap<>();
+        int i = 0;
+        while (true) {
+            ArrayList<String> greekWords  = linesCopy.get(linesCopy.lastKey());
+            for (String word:greekWords) {
+                fileContent.put(word, translations.get(word));
                 i++;
+                if (i == number) {
+                    break;
+                }            
             }
-            lines.pollLastEntry();
+            if (i == number) {
+                break;
+            }           
+            linesCopy.pollLastEntry();
         }
         filtered = true;    
     }
     
     public HashMap returnFileContent() {
         if (!filtered) {
-            filterTopWords(10);
+            filterTopWords(100);
         }
         return fileContent;
     }

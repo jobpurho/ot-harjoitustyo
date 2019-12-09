@@ -31,7 +31,7 @@ public class FileLexiconDao implements LexiconDao {
         return null;
     }
 
-    public void save(){
+    public void save() {
         try {
             FileOutputStream outputFile = new FileOutputStream(savedFileName);
             ObjectOutputStream output = new ObjectOutputStream(outputFile);
