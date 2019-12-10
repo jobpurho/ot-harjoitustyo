@@ -5,8 +5,6 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.io.*;
 
-//Tämä on luonnos sanakirjan lukemista varten, joka ei vielä toimi täydellisesti. Parempi versio tulee myöhemmin.
-
 public class FileMounceDictionary implements OriginalLexicon {
 
     private TreeMap<Integer, ArrayList<String>> lines;
@@ -15,7 +13,7 @@ public class FileMounceDictionary implements OriginalLexicon {
     private int number;
     private String greekWord;
     private boolean filtered;
-    
+
     public FileMounceDictionary(String mounceFile) {
         lines = new TreeMap<>();
         translations = new HashMap<>();
@@ -34,6 +32,11 @@ public class FileMounceDictionary implements OriginalLexicon {
         }
     }
     
+    /**
+     * Method creates a list of greek words with frequency and a list of meanings
+     * 
+     * @param line line of the file
+     */
     public void filter(String line) {
         
         if (line.matches(".*[0-9]x .*")) {

@@ -15,7 +15,7 @@ public class FileLexiconDaoTest {
     
     public FileLexiconDaoTest() {
         fldao = new FileLexiconDao("test.ser");
-        OriginalLexicon lexicon = new FileOriginalLexicon("file.txt");
+        OriginalLexicon lexicon = new FileMounceDictionary("dictionary.txt");
         fldao.setFileContent(lexicon.getFileContent());
     }
     

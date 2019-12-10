@@ -1,0 +1,4 @@
+/**
+ * tallennus
+ */
+package wordapp.dao;

@@ -1,0 +1,4 @@
+/**
+ * käyttöliittymä
+ */
+package wordapp.ui;

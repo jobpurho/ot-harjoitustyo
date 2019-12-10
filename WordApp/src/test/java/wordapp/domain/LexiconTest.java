@@ -6,10 +6,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import wordapp.dao.FileLexiconDao;
-import wordapp.dao.FileOriginalLexicon;
-import wordapp.dao.LexiconDao;
-import wordapp.dao.OriginalLexicon;
+import wordapp.dao.*;
 
 public class LexiconTest {
     
@@ -17,7 +14,7 @@ public class LexiconTest {
     
     public LexiconTest() {
         LexiconDao lexDao = new FileLexiconDao("saved.ser");
-        OriginalLexicon lexicon = new FileOriginalLexicon("file.txt");
+        OriginalLexicon lexicon = new FileMounceDictionary("dictionary.txt");
         lexDao.setFileContent(lexicon.getFileContent());
         this.lexicon = new Lexicon(lexDao);
     }

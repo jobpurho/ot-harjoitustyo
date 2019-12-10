@@ -1,0 +1,4 @@
+/**
+ * logiikka
+ */
+package wordapp.domain;
