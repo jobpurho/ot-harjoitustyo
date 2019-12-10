@@ -9,4 +9,5 @@
 | 2.12. |7     | laajemman sanaston lisääminen ohjelmaan |
 | 3.12. |10    | graafisen käyttöliittymän luominen ym. |
 | 9.12. |2     | checkstyle, ohjelmointivirheiden korjaus, merkkijononvertailun päivitys |
-| yht   |41    |   |
+| 9.12. |7     | tiedoston lukijan ja merkkijonovertailun parantaminen |
+| yht   |48    |   |
