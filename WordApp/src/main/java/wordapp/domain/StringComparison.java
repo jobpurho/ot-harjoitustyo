@@ -16,10 +16,10 @@ public class StringComparison {
         verb = false;
         spellingMistake = false;
         for (String correctString:correctStrings) {
-            if (correctString.split(" ").length>1) {
+            if (correctString.split(" ").length > 1) {
                 if (correctString.split(" ")[0].matches("(an|a|the)")) {
                     noun = true;
-                } else if (correctString.split(" ")[0].equals("to")){
+                } else if (correctString.split(" ")[0].equals("to")) {
                     verb = true;
                 }
             }
@@ -47,15 +47,16 @@ public class StringComparison {
     boolean skipPreEquals(String firstString, String secondString) {
         String[] firstWords = firstString.split(" ");
         String[] secondWords = secondString.split(" ");
-        int a = secondString.indexOf(" ")+1;
+        int a = secondString.indexOf(" ") + 1;
         int b = secondString.length();
-        int c = firstString.indexOf(" ")+1;
+        int c = firstString.indexOf(" ") + 1;
         int d = firstString.length();
         if (secondWords.length > 1 && firstWords.length > 1) {
-            if (secondString.substring(a, b).equals(firstString.substring(c,d))) {         
+            if (secondString.substring(a, b).equals(firstString.substring(c, d))) {         
                 return true;
             }            
-        } if (secondWords.length > 1 && secondWords[0].length() <= 3 && secondWords[1].length() >= 2) {
+        }
+        if (secondWords.length > 1 && secondWords[0].length() <= 3 && secondWords[1].length() >= 2) {
             if (secondString.substring(a, b).equals(firstString)) { 
                 return true;
             }
@@ -64,16 +65,16 @@ public class StringComparison {
     }
     
     void checkSpelling(String answer, String correct) {
-        if (answer.split(" ").length<2) {
-            
+        if (answer.split(" ").length < 2) {
+            spellingMistake = false;
         } else if (verb && !noun && !answer.split(" ")[0].equals("to")) {
             spellingMistake = true;
-        } else if (!verb && noun && answer.split(" ")[0].length()<=3) {
+        } else if (!verb && noun && answer.split(" ")[0].length() <= 3) {
             if (!answer.split(" ")[0].matches("(the|an|a)")) {
                 spellingMistake = true;
-            } else if (answer.split(" ")[0].equals("an") && !answer.split(" ")[1].substring(0,1).matches("[aeiouAEIOU]")) {
+            } else if (answer.split(" ")[0].equals("an") && !answer.split(" ")[1].substring(0, 1).matches("[aeiouAEIOU]")) {
                 spellingMistake = true;
-            } else if (answer.split(" ")[0].equals("a") && answer.split(" ")[1].substring(0,1).matches("[aeiouAEIOU]")) {
+            } else if (answer.split(" ")[0].equals("a") && answer.split(" ")[1].substring(0, 1).matches("[aeiouAEIOU]")) {
                 spellingMistake = true;
             }
         }

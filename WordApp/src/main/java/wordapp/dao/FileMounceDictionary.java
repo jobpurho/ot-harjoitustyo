@@ -111,14 +111,14 @@ public class FileMounceDictionary implements OriginalLexicon {
         if (part.matches(".*[α-ω\\.].*")) {
             return "";
         }
-        if (part.split(" ").length>7) {
+        if (part.split(" ").length > 7) {
             return "";
         }
         if (part.matches(".*(NT|perfect|from the Hebrew).*")) {
             return "";
         }
         part = part.replaceAll("\\([a-zA-Z0-9]\\) *", "");
-        if (part.substring(0,1).equals(" ")) {
+        if (part.substring(0, 1).equals(" ")) {
             part = part.substring(1, part.length());
         }
         return part;
