@@ -25,7 +25,6 @@ public class Gui extends Application {
     private WordStudy wordStudy;
     private LexiconDao lexiconDao;
     private String greekWord = "First";
-    private boolean spellingMistake;
     
     private Timer timer;
     private boolean first;
@@ -140,7 +139,6 @@ public class Gui extends Application {
         if (wordStudy.isCorrect(answer)) {
             return true;
         }
-        spellingMistake = false;
         return false;
     }
     
