@@ -51,8 +51,6 @@ public class StringComparison {
         int b = secondString.length();
         int c = firstString.indexOf(" ")+1;
         int d = firstString.length();
-        System.out.println("answer:" + secondString.substring(a, b));
-        System.out.println("correct:" + firstString);
         if (secondWords.length > 1 && firstWords.length > 1) {
             if (secondString.substring(a, b).equals(firstString.substring(c,d))) {         
                 return true;
