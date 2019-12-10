@@ -1,5 +1,0 @@
-λόγος,word
-βλέπω,to see
-γράφω,to write;to scratch
-μάχαιρα,dagger;a short sword
-βάλλω;throw

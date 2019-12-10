@@ -18,7 +18,7 @@ public class LexiconTest {
     public LexiconTest() {
         LexiconDao lexDao = new FileLexiconDao("saved.ser");
         OriginalLexicon lexicon = new FileOriginalLexicon("file.txt");
-        lexDao.setFileContent(lexicon.returnFileContent());
+        lexDao.setFileContent(lexicon.getFileContent());
         this.lexicon = new Lexicon(lexDao);
     }
     
@@ -40,7 +40,7 @@ public class LexiconTest {
     
     @Test
     public void sizeOfContentAndKeysIsSame() {
-        assertEquals(lexicon.returnContent().size(), lexicon.returnKeys().size());
+        assertEquals(lexicon.getLexiconContent().size(), lexicon.getKeys().size());
     }
 
 }

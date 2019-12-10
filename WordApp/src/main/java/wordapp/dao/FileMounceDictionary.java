@@ -145,7 +145,7 @@ public class FileMounceDictionary implements OriginalLexicon {
         filtered = true;    
     }
     
-    public HashMap returnFileContent() {
+    public HashMap getFileContent() {
         if (!filtered) {
             filterTopWords(100);
         }

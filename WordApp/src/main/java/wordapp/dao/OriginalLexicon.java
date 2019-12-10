@@ -7,6 +7,6 @@ import java.nio.file.Paths;
 
 public interface OriginalLexicon {
     
-    public HashMap returnFileContent();  
+    public HashMap getFileContent();  
     
 }

@@ -34,18 +34,18 @@ public class FileMounceDictionaryTest {
 
     @Test
     public void fileContentIsNotEmpty() {
-        assertTrue(mounce.returnFileContent().size()>0);
+        assertTrue(mounce.getFileContent().size()>0);
     }
     
     @Test
     public void fileContentSizeIsCorrectAfterFiltering() {
         mounce.filterTopWords(10);
-        assertTrue(mounce.returnFileContent().size()==10);
+        assertTrue(mounce.getFileContent().size()==10);
         mounce.filterTopWords(100);
-        assertTrue(mounce.returnFileContent().size()==100);
+        assertTrue(mounce.getFileContent().size()==100);
         mounce.filterTopWords(200);
-        assertTrue(mounce.returnFileContent().size()==200);
+        assertTrue(mounce.getFileContent().size()==200);
         mounce.filterTopWords(1000);
-        assertTrue(mounce.returnFileContent().size()==1000);
+        assertTrue(mounce.getFileContent().size()==1000);
     }
 }

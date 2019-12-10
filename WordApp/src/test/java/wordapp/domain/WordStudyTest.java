@@ -17,7 +17,7 @@ public class WordStudyTest {
         LexiconDao lexDao = new FileLexiconDao("saved.ser");
         FileMounceDictionary lexicon = new FileMounceDictionary("dictionary.txt");
         lexicon.filterTopWords(100);
-        lexDao.setFileContent(lexicon.returnFileContent());
+        lexDao.setFileContent(lexicon.getFileContent());
         study = new WordStudy(lexDao);
     }
     
@@ -42,11 +42,11 @@ public class WordStudyTest {
     public void indexIsFromTheRange() {
         for (int i=0;i<100;i++) {
             study.chooseNextWord();
-            assertTrue(study.returnIndex()<100&&study.returnIndex()>=0);
+            assertTrue(study.getIndex()<100&&study.getIndex()>=0);
         }
     }
     public void returnCurrentMeaningsAsStringReturnsMax100Characters() {
-        assertTrue(study.returnCurrentMeaningsAsString().length()<=100);
+        assertTrue(study.getCurrentMeaningsAsString().length()<=100);
     }
 
 }

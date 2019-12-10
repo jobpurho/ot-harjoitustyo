@@ -89,7 +89,7 @@ public class Gui extends Application {
         Label definition = new Label("");
         answer.setOnAction(e-> {            
             if (greekWord != null && !wordStudy.answered()) {
-                String meanings = wordStudy.returnCurrentMeaningsAsString();
+                String meanings = wordStudy.getCurrentMeaningsAsString();
                 String spelling = "";
                 if (checkAnswer(answerInput.getText())) {   
                     if (wordStudy.spellingMistake()) {
@@ -144,7 +144,7 @@ public class Gui extends Application {
     
     public void setNext() {
         this.wordStudy.chooseNextWord();   
-        greekWord = this.wordStudy.returnCurrentWordAsString();        
+        greekWord = this.wordStudy.getCurrentWordAsString();        
     }
     
     public boolean savedExists() {
@@ -172,7 +172,7 @@ public class Gui extends Application {
         this.lexiconDao = new FileLexiconDao("saved.ser");
         FileMounceDictionary mounce = new FileMounceDictionary("dictionary.txt");
         mounce.filterTopWords(number);
-        HashMap fileContent = mounce.returnFileContent();
+        HashMap fileContent = mounce.getFileContent();
         
         this.lexiconDao.setFileContent(fileContent);    
         this.wordStudy = new WordStudy(this.lexiconDao);
