@@ -22,12 +22,15 @@ public class Gui extends Application {
     private Scene createScene;
     private Scene studyScene;
     
-    private WordStudy wordStudy;
-    private LexiconDao lexiconDao;
-    private String greekWord = "First";
+    private WordStudyService service;
     
     private Timer timer;
     private boolean first;
+    
+    @Override
+    public void init() {
+        service = new WordStudyService();
+    }
     
     @Override
     public void start(Stage primaryStage) {
@@ -39,10 +42,10 @@ public class Gui extends Application {
             primaryStage.setScene(createScene);
             }
         );        
-        if (savedExists()) {
+        if (service.savedExists()) {
             Button returnToSavedButton = new Button("Return to saved");  
             returnToSavedButton.setOnAction(e-> {
-                load();
+                service.load();
                 primaryStage.setScene(studyScene);
                 }
             );
@@ -63,8 +66,8 @@ public class Gui extends Application {
         Label check = new Label("");
         Button startNew = new Button("Start!");     
         startNew.setOnAction(e-> {        
-            if (readInteger(numberInput.getText())) {
-                createNew(Integer.parseInt(numberInput.getText()));            
+            if (service.readInteger(numberInput.getText())) {
+                service.createNew(Integer.parseInt(numberInput.getText()));            
                 primaryStage.setScene(studyScene);                
             } else {
                 readingError.setText("PLEASE ENTER AN INTEGER");
@@ -88,37 +91,37 @@ public class Gui extends Application {
         Label correct = new Label("");
         Label definition = new Label("");
         answer.setOnAction(e-> {            
-            if (greekWord != null && !wordStudy.answered()) {
-                String meanings = wordStudy.getCurrentMeaningsAsString();
+            if (service.getGreekWord() != null && !service.getWordStudy().answered()) {
+                String meanings = service.getWordStudy().getCurrentMeaningsAsString();
                 String spelling = "";
-                if (checkAnswer(answerInput.getText())) {   
-                    if (wordStudy.spellingMistake()) {
+                if (service.checkAnswer(answerInput.getText())) {   
+                    if (service.getWordStudy().spellingMistake()) {
                         spelling = " There was propably a spelling mistake.";
                     }
                     correct.setText("Correct!" + spelling);   
-                    definition.setText("\nDefinition of the word " + greekWord +  ":\n" + meanings + "...");
-                } else if (!greekWord.equals("First")) {      
+                    definition.setText("\nDefinition of the word " + service.getGreekWord() +  ":\n" + meanings + "...");
+                } else if (!service.getWordStudy().equals("First")) {      
                     correct.setText("Wrong answer");  
-                    definition.setText("\nDefinition of the word " + greekWord +  ":\n" + meanings + "...");
+                    definition.setText("\nDefinition of the word " + service.getGreekWord() +  ":\n" + meanings + "...");
                 }                       
      
             }           
             answerInput.setText("");
         });
         next.setOnAction(e-> {
-            setNext();
+            service.setNext();
             correct.setText("");
             definition.setText("");
-            if (greekWord == null) {
+            if (service.getGreekWord() == null) {
                 answerInputLabel.setText("You have studied all the words!");
             } else {
-                answerInputLabel.setText("What is the meaning of the word " + greekWord); 
+                answerInputLabel.setText("What is the meaning of the word " + service.getGreekWord()); 
             }         
             answerInput.setText("");
         });
         
         saveAndQuit.setOnAction(e-> {
-            saveAndExit();
+            service.saveAndExit();
             
         });
         study.getChildren().addAll(answerInputLabel, answerInput, answer, next, correct, definition, saveAndQuit);
@@ -129,60 +132,7 @@ public class Gui extends Application {
         primaryStage.setTitle("WordApp");
         primaryStage.show();
     }
-    
-    public void saveAndExit() {
-        wordStudy.quitWordStudy();
-        System.exit(0);
-    }
-    
-    public boolean checkAnswer(String answer) {
-        if (wordStudy.isCorrect(answer)) {
-            return true;
-        }
-        return false;
-    }
-    
-    public void setNext() {
-        this.wordStudy.chooseNextWord();   
-        greekWord = this.wordStudy.getCurrentWordAsString();        
-    }
-    
-    public boolean savedExists() {
-        if (new File("saved.ser").exists()) {
-            return true;
-        }
-        return false;
-    }
-    
-    public void load() {
-        this.lexiconDao = new FileLexiconDao("saved.ser");
-        this.wordStudy = new WordStudy(this.lexiconDao);
-    }
-    
-    public boolean readInteger(String input) {
-        try {
-            int number = Integer.parseInt(input);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-    
-    public void createNew(int number) {
-        this.lexiconDao = new FileLexiconDao("saved.ser");
-        FileMounceDictionary mounce = new FileMounceDictionary("dictionary.txt");
-        mounce.filterTopWords(number);
-        HashMap fileContent = mounce.getFileContent();
-        
-        this.lexiconDao.setFileContent(fileContent);    
-        this.wordStudy = new WordStudy(this.lexiconDao);
-        
-    }
-    
-    @Override
-    public void stop() {
-        
-    }
+
     
     public static void main(String[] args) {
         launch(args);
