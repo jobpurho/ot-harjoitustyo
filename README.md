@@ -4,11 +4,11 @@ Tähän repositorioon palautan kurssin *Ohjelmistotekniikka* harjoitustehtäviä
 
 **Repositorio täydentyy kurssin edetessä**
 
-# WordApp
+## WordApp
 
 Sovellus mahdollistaa muinaiskreikan sanaston opiskelun. Maven-projekti löytyy sijainnista [WordApp](https://github.com/jobpurho/ot-harjoitustyo/tree/master/WordApp).
 
-# Dokumentaatio
+## Dokumentaatio
 
 [Vaatimusmaarittely](https://github.com/jobpurho/ot-harjoitustyo/tree/master/dokumentointi/vaatimusmaarittely.md)
 
@@ -18,26 +18,40 @@ Sovellus mahdollistaa muinaiskreikan sanaston opiskelun. Maven-projekti löytyy 
 
 [Käyttöohje](https://github.com/jobpurho/ot-harjoitustyo/tree/master/dokumentointi/kayttoohje.md)
 
-# Releaset
+## Releaset
+
 [viikko5](https://github.com/jobpurho/ot-harjoitustyo/releases/tag/viikko5)
 
-# Komentorivitoiminnot
-ohjelman suoritus:
+[viikko6](https://github.com/jobpurho/ot-harjoitustyo/releases/tag/viikko6)
+
+## Komentorivitoiminnot
+
+### Ohjelman suoritus
 ```
 mvn compile exec:java -Dexec.mainClass=wordapp.Main
 ```
 
-testit:
+### Testien suoritus
 ```
 mvn test
 ```
 
-testikattavuus:
+### Testikattavuusraportti
 ```
 mvn jacoco:report
 ```
 
-jarin generointi:
+### Jarin generointi:
 ```
 mvn package
+```
+
+### Jarin generointi:
+```
+mvn package
+```
+
+### JavaDoc
+```
+mvn javadoc:javadoc
 ```
