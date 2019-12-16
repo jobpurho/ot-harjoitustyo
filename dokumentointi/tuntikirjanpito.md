@@ -10,4 +10,6 @@
 | 3.12. |10    | graafisen käyttöliittymän luominen ym. |
 | 9.12. |2     | checkstyle, ohjelmointivirheiden korjaus, merkkijononvertailun päivitys |
 | 9.12. |7     | tiedoston lukijan ja merkkijonovertailun parantaminen |
+| 15.12.|1     | käyttöliittymän parempi eriyttäminen sovelluslogiikasta |
+| 16.12.|2     | arkkitehtuurikuvauksen päivitys |
 | yht   |48    |   |
