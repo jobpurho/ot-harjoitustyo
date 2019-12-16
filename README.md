@@ -46,11 +46,6 @@ mvn jacoco:report
 mvn package
 ```
 
-### Jarin generointi
-```
-mvn package
-```
-
 ### JavaDoc
 ```
 mvn javadoc:javadoc
