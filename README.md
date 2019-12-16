@@ -41,12 +41,12 @@ mvn test
 mvn jacoco:report
 ```
 
-### Jarin generointi:
+### Jarin generointi
 ```
 mvn package
 ```
 
-### Jarin generointi:
+### Jarin generointi
 ```
 mvn package
 ```
