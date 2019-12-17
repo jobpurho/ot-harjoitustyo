@@ -17,6 +17,7 @@ public class FileMounceDictionary implements OriginalLexicon {
     public FileMounceDictionary(String mounceFile) {
         lines = new TreeMap<>();
         translations = new HashMap<>();
+        int i=0;
         try {
             Scanner fileReader = new Scanner(new File(mounceFile)); 
             while (fileReader.hasNextLine()) {
@@ -25,6 +26,7 @@ public class FileMounceDictionary implements OriginalLexicon {
                     continue;
                 } else {
                     filter(line);
+                    i++;
                 }
             }
         } catch (Exception e) {
@@ -45,12 +47,13 @@ public class FileMounceDictionary implements OriginalLexicon {
             String[] parts = line.split(" ");
             number = Integer.parseInt(parts[parts.length - 1].replaceAll("[x,]" , ""));
             greekWord = parts[3];
+            greekWord = createDuplicate(greekWord);
         } else if (line.substring(0, 5).equals("<def>")) {
             String[] translations = editDefinition(line);
             if (!lines.containsKey(number)) {
                 lines.put(number , new ArrayList<>());
-            }
-            lines.get(number).add(greekWord);
+            }            
+            lines.get(number).add(greekWord);            
             this.translations.put(greekWord, translations);
         }
     }
@@ -159,7 +162,7 @@ public class FileMounceDictionary implements OriginalLexicon {
      * @param number number of top words
      */     
     public boolean tryToFilter(int number) {
-        if (number<1||number>lines.size()) {
+        if (number<1||number>translations.size()) {
             return false;
         }
         filterTopWords(number);
@@ -175,27 +178,33 @@ public class FileMounceDictionary implements OriginalLexicon {
     public void filterTopWords(int number) {
         TreeMap<Integer, ArrayList<String>> linesCopy = new TreeMap<>(lines);
         fileContent = new HashMap<>();
-        int i = 0;
-        while (true) {
+        while (fileContent.size()!=number) {
             ArrayList<String> greekWords  = linesCopy.get(linesCopy.lastKey());
             for (String word:greekWords) {
                 fileContent.put(word, translations.get(word));
-                i++;
-                if (i == number) {
+                if (fileContent.size()==number) {
                     break;
                 }            
-            }
-            if (i == number) {
-                break;
-            }           
+            }          
             linesCopy.pollLastEntry();
         }        
+    }
+    
+    String createDuplicate(String word) {
+        while (translations.containsKey(word)) {
+            if (!word.contains("I")) {
+                word+= " I";
+            }
+            word += "I";
+        }        
+        return word;
     }
     
     public HashMap getFileContent() {
         if (!filtered) {
             tryToFilter(100);
         }
+        System.out.println(fileContent.size());
         return fileContent;
     }
     

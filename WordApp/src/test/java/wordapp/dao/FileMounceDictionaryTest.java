@@ -47,5 +47,7 @@ public class FileMounceDictionaryTest {
         assertTrue(mounce.getFileContent().size()==200);
         mounce.tryToFilter(1000);
         assertTrue(mounce.getFileContent().size()==1000);
+        mounce.tryToFilter(4000);
+        assertTrue(mounce.getFileContent().size()==4000);
     }
 }
