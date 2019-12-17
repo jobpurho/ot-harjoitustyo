@@ -31,8 +31,8 @@ public class Gui extends Application {
     @Override
     public void start(Stage primaryStage) {
         //main scene
-        HBox startPage = new HBox();   
-        startPage.setAlignment(Pos.CENTER);
+        HBox startPane = new HBox(10);   
+        startPane.setAlignment(Pos.CENTER);
         Button createNewStudyButton = new Button("New study");     
         createNewStudyButton.setOnAction(e-> {
             primaryStage.setScene(createScene);
@@ -45,20 +45,21 @@ public class Gui extends Application {
                 primaryStage.setScene(studyScene);
                 }
             );
-            startPage.getChildren().addAll(returnToSavedButton, createNewStudyButton);
+            startPane.getChildren().addAll(returnToSavedButton, createNewStudyButton);
         } else {
-            startPage.getChildren().addAll(createNewStudyButton);
+            startPane.getChildren().addAll(createNewStudyButton);
         }
-        firstScene = new Scene(startPage, 500, 500);
+        firstScene = new Scene(startPane, 500, 500);
 
         
         //create new study -scene
-        VBox newStudyPane = new VBox();         
+        VBox newStudyPane = new VBox(10);  
+        VBox.setMargin(newStudyPane, new Insets(10,10,10,10));
         newStudyPane.setAlignment(Pos.CENTER);
-        Label inputLabel = new Label("You can limit the vocabulary to the most common words.\n"
-                + "For example, if you type '100', you will study only the 100 most frequent words.");
+        Label inputLabel = new Label("How many most common words you want to study?\n");
         Label readingError = new Label("");
         TextField numberInput = new TextField();
+        numberInput.setMaxWidth(100);
         Label check = new Label("");
         Button startNew = new Button("Start!");     
         startNew.setOnAction(e-> {        
@@ -75,16 +76,17 @@ public class Gui extends Application {
 
         //study scene
         
-        VBox study = new VBox();            
+        VBox study = new VBox(10);            
         study.setAlignment(Pos.CENTER);
         Label answerInputLabel = new Label("Click next to start learning greek vocabulary!");
         
         TextField answerInput = new TextField();
+        answerInput.setMaxWidth(200);
         Button answer = new Button("Answer!");
         Button next = new Button("next");
         Button saveAndQuit = new Button("save and quit");
         Label correct = new Label("");
-        Label definition = new Label("");
+        Label definition = new Label(" \n ");
         answer.setOnAction(e-> {            
             if (service.getGreekWord() != null && !service.getWordStudy().answered()) {
                 String meanings = service.getWordStudy().getCurrentMeaningsAsString();
@@ -94,10 +96,10 @@ public class Gui extends Application {
                         spelling = " There was propably a spelling mistake.";
                     }
                     correct.setText("Correct!" + spelling);   
-                    definition.setText("\nDefinition of the word " + service.getGreekWord() +  ":\n" + meanings + "...");
+                    definition.setText("Definition of the word " + service.getGreekWord() +  ":\n" + meanings + "...");
                 } else if (!service.getWordStudy().equals("First")) {      
                     correct.setText("Wrong answer");  
-                    definition.setText("\nDefinition of the word " + service.getGreekWord() +  ":\n" + meanings + "...");
+                    definition.setText("Definition of the word " + service.getGreekWord() +  ":\n" + meanings + "...");
                 }                       
      
             }           
@@ -106,7 +108,7 @@ public class Gui extends Application {
         next.setOnAction(e-> {
             service.setNext();
             correct.setText("");
-            definition.setText("");
+            definition.setText(" \n ");
             if (service.getGreekWord() == null) {
                 answerInputLabel.setText("You have studied all the words!");
             } else {
