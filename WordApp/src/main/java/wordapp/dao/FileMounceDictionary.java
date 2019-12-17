@@ -14,10 +14,15 @@ public class FileMounceDictionary implements OriginalLexicon {
     private String greekWord;
     private boolean filtered;
 
+    /**
+     * Constructor reads a file and stores the content to variables
+     * 
+     * @param mounceFile name of the file
+     */
     public FileMounceDictionary(String mounceFile) {
         lines = new TreeMap<>();
         translations = new HashMap<>();
-        int i=0;
+        int i = 0;
         try {
             Scanner fileReader = new Scanner(new File(mounceFile)); 
             while (fileReader.hasNextLine()) {
@@ -25,7 +30,7 @@ public class FileMounceDictionary implements OriginalLexicon {
                 if (line.length() < 5) {
                     continue;
                 } else {
-                    filter(line);
+                    filterWordsAndDefs(line);
                     i++;
                 }
             }
@@ -39,7 +44,7 @@ public class FileMounceDictionary implements OriginalLexicon {
      * 
      * @param line line of the file
      */
-    public void filter(String line) {
+    public void filterWordsAndDefs(String line) {
         
         if (line.matches(".*[0-9]x .*")) {
             String[] parts = line.split("x ");
@@ -60,7 +65,9 @@ public class FileMounceDictionary implements OriginalLexicon {
     
     /**
      * Method split definition in dictionary to parts by string "; "
+     * and calls editPartOfDeft to split part to words.
      * Method returns a list of words as a string separated by ","
+     * 
      * @param translation definition for the greek word
      */
     public String[] editDefinition(String translation) {
@@ -161,8 +168,8 @@ public class FileMounceDictionary implements OriginalLexicon {
      * 
      * @param number number of top words
      */     
-    public boolean tryToFilter(int number) {
-        if (number<1||number>translations.size()) {
+    public boolean tryToFilterTopWords(int number) {
+        if (number < 1 || number > translations.size()) {
             return false;
         }
         filterTopWords(number);
@@ -178,22 +185,27 @@ public class FileMounceDictionary implements OriginalLexicon {
     public void filterTopWords(int number) {
         TreeMap<Integer, ArrayList<String>> linesCopy = new TreeMap<>(lines);
         fileContent = new HashMap<>();
-        while (fileContent.size()!=number) {
+        while (fileContent.size() != number) {
             ArrayList<String> greekWords  = linesCopy.get(linesCopy.lastKey());
             for (String word:greekWords) {
                 fileContent.put(word, translations.get(word));
-                if (fileContent.size()==number) {
+                if (fileContent.size() == number) {
                     break;
                 }            
             }          
             linesCopy.pollLastEntry();
         }        
     }
-    
+
+     /**
+     * Method adds ordinals to identical words
+     * 
+     * @param word
+     */     
     String createDuplicate(String word) {
         while (translations.containsKey(word)) {
             if (!word.contains("I")) {
-                word+= " I";
+                word += " I";
             }
             word += "I";
         }        
@@ -202,7 +214,7 @@ public class FileMounceDictionary implements OriginalLexicon {
     
     public HashMap getFileContent() {
         if (!filtered) {
-            tryToFilter(100);
+            tryToFilterTopWords(100);
         }
         return fileContent;
     }

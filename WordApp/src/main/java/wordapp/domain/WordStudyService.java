@@ -50,19 +50,16 @@ public class WordStudyService {
             int number = Integer.parseInt(input);
             this.lexiconDao = new FileLexiconDao("saved.ser");
             FileMounceDictionary mounce = new FileMounceDictionary("dictionary.txt");
-            if (!mounce.tryToFilter(number)) {
+            if (!mounce.tryToFilterTopWords(number)) {
                 return false;
             }
-
-            HashMap fileContent = mounce.getFileContent();
-        
+            HashMap fileContent = mounce.getFileContent();        
             this.lexiconDao.setFileContent(fileContent);    
             this.wordStudy = new WordStudy(this.lexiconDao);
             return true;
-        } catch (Exception e) {
-            
+        } catch (Exception e) {     
+            return false;
         }    
-        return false;
     }
     
     public String getGreekWord() {

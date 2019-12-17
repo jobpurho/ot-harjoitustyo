@@ -1,16 +1,25 @@
 package wordapp.domain;
 
+import org.apache.commons.text.similarity.LevenshteinDistance;
+
 public class StringComparison {
     
-    //Jatkossa luokka hyödyntää merkkijonovertailualgoritmia tms., jotta lähes oikea vastaus voidaan hyväksyä oikeana tai osittain oikeana.
     private boolean spellingMistake;
     private boolean verb;
     private boolean noun;
     
-    public StringComparison() {
-        
-    }
+    private LevenshteinDistance lDistance;
     
+    public StringComparison() {
+        lDistance = new LevenshteinDistance();
+    }
+
+    /**
+     * Method uses class org.apache.commons.text.similarity.LevenshteinDistance to count the edit distance of the two strings
+     * 
+     * @param answerString
+     * @param correctStrings
+     */      
     public boolean isSimilarEnough(String answerString, String[] correctStrings) {
         noun = false;
         verb = false;
@@ -23,24 +32,28 @@ public class StringComparison {
                     verb = true;
                 }
             }
-            if (similarity(answerString, correctString) > 80) {
+            if (similarPreSkipped(answerString, correctString)) {
+                return true;
+            } 
+            if (answerString.length() > 4 && lDistance.apply(answerString, correctString) < 3) {
+                spellingMistake = true;
                 return true;
             }
         }
         return false;
     }    
     
-    double similarity(String answerString, String correctString) {
+    boolean similarPreSkipped(String answerString, String correctString) {
         String answerStringLower = answerString.toLowerCase();
         String correctStringLower = correctString.toLowerCase();
         if (answerStringLower.equals(correctStringLower)) {
-            return 100;
+            return true;
         }
         if (skipPreEquals(answerStringLower, correctStringLower) || skipPreEquals(correctStringLower, answerStringLower)) {
             checkSpelling(answerStringLower, correctStringLower);
-            return 100;
+            return true;
         }
-        return levensthein();
+        return false;
     }
     
     //skip an article or preposition in correct string
@@ -78,11 +91,6 @@ public class StringComparison {
                 spellingMistake = true;
             }
         }
-    }
-    
-    double levensthein() {
-        //merkkijonovertailu
-        return 0;
     }
     
     public boolean spellingMistake() {
