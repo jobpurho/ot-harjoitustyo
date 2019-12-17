@@ -55,6 +55,11 @@ public class FileMounceDictionary implements OriginalLexicon {
         }
     }
     
+    /**
+     * Method split definition in dictionary to parts by string "; "
+     * Method returns a list of words as a string separated by ","
+     * @param translation definition for the greek word
+     */
     public String[] editDefinition(String translation) {
         String output = "";
         String[] translationArray = translation.replaceAll("(<def>|</def>.*)", "").split("; ");
@@ -71,6 +76,11 @@ public class FileMounceDictionary implements OriginalLexicon {
         return output.split(",");
     }
     
+    /**
+     * Method split part of the definition to subparts (words) by string ", "
+     * Method returns a list of words as a string separated by ","
+     * @param part part of the definition for the greek word
+     */
     String editPartOfDef(String part) {
         String output = "";
         part = part.replace("!", "!,");
@@ -91,6 +101,11 @@ public class FileMounceDictionary implements OriginalLexicon {
         return output;
     }
     
+    /**
+     * Method creates to separate items from the part of definition if it contains "or"
+     * 
+     * @param part part of the definition for the greek word
+     */
     String splitOr(String part) {
         if (part.contains("or")) {
             String a = new String(part).replaceAll(" [a-zA-Z]+ or ", " ");
@@ -100,16 +115,26 @@ public class FileMounceDictionary implements OriginalLexicon {
         return part;
     }
     
-    boolean verseNumber(String part) {
-        if (part.matches("(([0-9] ){0,1}[a-zA-Z]{2,5}\\.{0,1} ){0,1}[0-9]{1,2}(:[0-9]{1,2}){0,1}.{0,10}")) {
+    /**
+     * Method tells if the string is verse number
+     * 
+     * @param string input string
+     */
+    boolean verseNumber(String string) {
+        if (string.matches("(([0-9] ){0,1}[a-zA-Z]{2,5}\\.{0,1} ){0,1}[0-9]{1,2}(:[0-9]{1,2}){0,1}.{0,10}")) {
             return true;
         }
-        if (part.matches("[0-9]{1,2}")) {
+        if (string.matches("[0-9]{1,2}")) {
             return true;
         }
         return false;
     }
-    
+
+    /**
+     * Method remove unnecessary information from the definition
+     * 
+     * @param part part of the definition for the greek word
+     */    
     String clean(String part) {
         if (part.matches(".*[α-ω\\.].*")) {
             return "";
@@ -126,7 +151,27 @@ public class FileMounceDictionary implements OriginalLexicon {
         }
         return part;
     }
+
+    /**
+     * Method returns true if filtering can be done by number
+     * Method calls filtering method
+     * 
+     * @param number number of top words
+     */     
+    public boolean tryToFilter(int number) {
+        if (number<1||number>lines.size()) {
+            return false;
+        }
+        filterTopWords(number);
+        filtered = true;   
+        return true;
+    }
     
+     /**
+     * Method filter the top words limited by number
+     * 
+     * @param number number of top words
+     */ 
     public void filterTopWords(int number) {
         TreeMap<Integer, ArrayList<String>> linesCopy = new TreeMap<>(lines);
         fileContent = new HashMap<>();
@@ -144,14 +189,17 @@ public class FileMounceDictionary implements OriginalLexicon {
                 break;
             }           
             linesCopy.pollLastEntry();
-        }
-        filtered = true;    
+        }        
     }
     
     public HashMap getFileContent() {
         if (!filtered) {
-            filterTopWords(100);
+            tryToFilter(100);
         }
         return fileContent;
+    }
+    
+    public int getWordCount() {
+        return lines.size();
     }
 }

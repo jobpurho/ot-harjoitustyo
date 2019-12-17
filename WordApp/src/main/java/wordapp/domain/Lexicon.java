@@ -7,7 +7,6 @@ public class Lexicon {
 
     private ArrayList<String> keys;
     private HashMap<String, String[]> lexiconContent;
-    private Random random;
     
     public Lexicon(LexiconDao ld) {
         lexiconContent = ld.returnFileContent();

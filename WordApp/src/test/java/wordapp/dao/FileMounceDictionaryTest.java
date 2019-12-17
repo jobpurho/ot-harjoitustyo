@@ -39,13 +39,13 @@ public class FileMounceDictionaryTest {
     
     @Test
     public void fileContentSizeIsCorrectAfterFiltering() {
-        mounce.filterTopWords(10);
+        mounce.tryToFilter(10);
         assertTrue(mounce.getFileContent().size()==10);
-        mounce.filterTopWords(100);
+        mounce.tryToFilter(100);
         assertTrue(mounce.getFileContent().size()==100);
-        mounce.filterTopWords(200);
+        mounce.tryToFilter(200);
         assertTrue(mounce.getFileContent().size()==200);
-        mounce.filterTopWords(1000);
+        mounce.tryToFilter(1000);
         assertTrue(mounce.getFileContent().size()==1000);
     }
 }

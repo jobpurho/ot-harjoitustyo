@@ -16,7 +16,7 @@ public class WordStudyTest {
     public WordStudyTest() {
         LexiconDao lexDao = new FileLexiconDao("saved.ser");
         FileMounceDictionary lexicon = new FileMounceDictionary("dictionary.txt");
-        lexicon.filterTopWords(100);
+        lexicon.tryToFilter(100);
         lexDao.setFileContent(lexicon.getFileContent());
         study = new WordStudy(lexDao);
     }

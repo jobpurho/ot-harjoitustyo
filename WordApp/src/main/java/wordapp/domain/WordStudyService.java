@@ -45,24 +45,24 @@ public class WordStudyService {
         this.wordStudy = new WordStudy(this.lexiconDao);
     }
     
-    public boolean readInteger(String input) {
+    public boolean tryToCreateNew(String input) {
         try {
             int number = Integer.parseInt(input);
+            this.lexiconDao = new FileLexiconDao("saved.ser");
+            FileMounceDictionary mounce = new FileMounceDictionary("dictionary.txt");
+            if (!mounce.tryToFilter(number)) {
+                return false;
+            }
+
+            HashMap fileContent = mounce.getFileContent();
+        
+            this.lexiconDao.setFileContent(fileContent);    
+            this.wordStudy = new WordStudy(this.lexiconDao);
             return true;
         } catch (Exception e) {
-            return false;
-        }
-    }
-    
-    public void createNew(int number) {
-        this.lexiconDao = new FileLexiconDao("saved.ser");
-        FileMounceDictionary mounce = new FileMounceDictionary("dictionary.txt");
-        mounce.filterTopWords(number);
-        HashMap fileContent = mounce.getFileContent();
-        
-        this.lexiconDao.setFileContent(fileContent);    
-        this.wordStudy = new WordStudy(this.lexiconDao);
-        
+            
+        }    
+        return false;
     }
     
     public String getGreekWord() {

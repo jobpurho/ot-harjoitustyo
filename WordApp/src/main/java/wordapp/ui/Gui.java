@@ -13,8 +13,6 @@ import javafx.stage.Stage;
 import javafx.scene.control.*;
 import javafx.scene.Scene;
 import javafx.scene.layout.*;
-import wordapp.dao.FileLexiconDao;
-import wordapp.dao.FileMounceDictionary;
 
 public class Gui extends Application {
     
@@ -24,8 +22,6 @@ public class Gui extends Application {
     
     private WordStudyService service;
     
-    private Timer timer;
-    private boolean first;
     
     @Override
     public void init() {
@@ -66,11 +62,10 @@ public class Gui extends Application {
         Label check = new Label("");
         Button startNew = new Button("Start!");     
         startNew.setOnAction(e-> {        
-            if (service.readInteger(numberInput.getText())) {
-                service.createNew(Integer.parseInt(numberInput.getText()));            
+            if (service.tryToCreateNew(numberInput.getText())) {
                 primaryStage.setScene(studyScene);                
             } else {
-                readingError.setText("PLEASE ENTER AN INTEGER");
+                readingError.setText("PLEASE ENTER AN INTEGER (RANGE=1-5376)");
             }
 
         });
