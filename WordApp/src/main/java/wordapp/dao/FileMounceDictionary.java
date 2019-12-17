@@ -204,7 +204,6 @@ public class FileMounceDictionary implements OriginalLexicon {
         if (!filtered) {
             tryToFilter(100);
         }
-        System.out.println(fileContent.size());
         return fileContent;
     }
     

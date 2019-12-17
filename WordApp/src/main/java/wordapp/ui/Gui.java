@@ -65,7 +65,7 @@ public class Gui extends Application {
             if (service.tryToCreateNew(numberInput.getText())) {
                 primaryStage.setScene(studyScene);                
             } else {
-                readingError.setText("PLEASE ENTER AN INTEGER (RANGE=1-5376)");
+                readingError.setText("PLEASE ENTER AN INTEGER (RANGE=1-5381)");
             }
 
         });
