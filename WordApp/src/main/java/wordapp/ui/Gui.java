@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import javafx.scene.control.*;
 import javafx.scene.Scene;
 import javafx.scene.layout.*;
+import javafx.scene.text.Font;
 
 public class Gui extends Application {
     
@@ -30,33 +31,40 @@ public class Gui extends Application {
     
     @Override
     public void start(Stage primaryStage) {
+        // Initialize "next" button for study scene already here.
+        // It is used to to move from create or main scene to study scene
+        Button next = new Button("Next");
+
         //main scene
         HBox startPane = new HBox(10);   
         startPane.setAlignment(Pos.CENTER);
         Button createNewStudyButton = new Button("New study");     
+        createNewStudyButton.setMinWidth(150);
         createNewStudyButton.setOnAction(e-> {
             primaryStage.setScene(createScene);
             }
         );        
         if (service.savedExists()) {
             Button returnToSavedButton = new Button("Return to saved");  
+            returnToSavedButton.setMinWidth(150);
             returnToSavedButton.setOnAction(e-> {
                 service.load();
                 primaryStage.setScene(studyScene);
+                next.fire();
                 }
             );
             startPane.getChildren().addAll(returnToSavedButton, createNewStudyButton);
         } else {
             startPane.getChildren().addAll(createNewStudyButton);
         }
-        firstScene = new Scene(startPane, 500, 500);
-
+        firstScene = new Scene(startPane, 700, 500);
         
         //create new study -scene
         VBox newStudyPane = new VBox(10);  
+        HBox inputArea = new HBox(10);
         VBox.setMargin(newStudyPane, new Insets(10,10,10,10));
         newStudyPane.setAlignment(Pos.CENTER);
-        Label inputLabel = new Label("How many most common words you want to study?\n");
+        Label inputLabel = new Label("How many most common words you want to study?");
         Label readingError = new Label("");
         TextField numberInput = new TextField();
         numberInput.setMaxWidth(100);
@@ -64,55 +72,65 @@ public class Gui extends Application {
         Button startNew = new Button("Start!");     
         startNew.setOnAction(e-> {        
             if (service.tryToCreateNew(numberInput.getText())) {
-                primaryStage.setScene(studyScene);                
+                primaryStage.setScene(studyScene);    
+                next.fire();
+
             } else {
                 readingError.setText("PLEASE ENTER AN INTEGER (RANGE=1-5381)");
             }
 
         });
-        newStudyPane.getChildren().addAll(inputLabel, readingError, numberInput, startNew);
-        createScene = new Scene(newStudyPane, 500, 500);
+        inputArea.getChildren().addAll(numberInput, startNew);
+        inputArea.setAlignment(Pos.CENTER);
+        newStudyPane.getChildren().addAll(inputLabel, readingError, inputArea);
+        createScene = new Scene(newStudyPane, 700, 500);
         
 
         //study scene
         
-        VBox study = new VBox(10);            
+        VBox study = new VBox(10); 
+        HBox buttons = new HBox(10);
+
         study.setAlignment(Pos.CENTER);
-        Label answerInputLabel = new Label("Click next to start learning greek vocabulary!");
-        
+        Label answerInputLabelTop = new Label("Write the meaning of the greek word!");
+        Label answerInputLabelBottom = new Label();
+        answerInputLabelBottom.setFont(new Font("Arial", 30));
         TextField answerInput = new TextField();
+        
         answerInput.setMaxWidth(200);
-        Button answer = new Button("Answer!");
-        Button next = new Button("next");
+        Button answer = new Button("Answer");
+        answer.setMinWidth(80);
+        next.setMinWidth(80);
         Button saveAndQuit = new Button("save and quit");
         Label correct = new Label("");
-        Label definition = new Label(" \n ");
+        Label definitionTop = new Label(" ");
+        Label definitionBottom = new Label(" ");
         answer.setOnAction(e-> {            
-            if (service.getGreekWord() != null && !service.getWordStudy().answered()) {
-                String meanings = service.getWordStudy().getCurrentMeaningsAsString();
-                String spelling = "";
-                if (service.checkAnswer(answerInput.getText())) {   
-                    if (service.getWordStudy().spellingMistake()) {
-                        spelling = " There was propably a spelling mistake.";
-                    }
-                    correct.setText("Correct!" + spelling);   
-                    definition.setText("Definition of the word " + service.getGreekWord() +  ":\n" + meanings + "...");
-                } else if (!service.getWordStudy().equals("First")) {      
-                    correct.setText("Wrong answer");  
-                    definition.setText("Definition of the word " + service.getGreekWord() +  ":\n" + meanings + "...");
-                }                       
-     
-            }           
+            String meanings = service.getWordStudy().getCurrentMeaningsAsString();
+            String spelling = "";
+            if (service.getWordStudy().isCorrect(answerInput.getText())) {   
+                if (service.getWordStudy().spellingMistake()) {
+                    spelling = " There was propably a spelling mistake.";
+                }
+                correct.setText("Correct!" + spelling);   
+                definitionBottom.setText(meanings);
+            } else {      
+                correct.setText("Wrong answer");  
+                definitionBottom.setText(meanings);
+            }              
+            definitionTop.setText("Definition of the word: " + service.getWordStudy().getCurrentWordAsString());                
             answerInput.setText("");
         });
-        next.setOnAction(e-> {
-            service.setNext();
+        next.setOnAction(e-> {            
+            answer.setMaxSize(100, 100);
+            service.getWordStudy().chooseNextWord();
             correct.setText("");
-            definition.setText(" \n ");
-            if (service.getGreekWord() == null) {
-                answerInputLabel.setText("You have studied all the words!");
+            definitionTop.setText(" ");
+            definitionBottom.setText(" ");
+            if (service.getWordStudy().getCurrentWordAsString() == null) {
+                answerInputLabelTop.setText("You have studied all the words!");
             } else {
-                answerInputLabel.setText("What is the meaning of the word " + service.getGreekWord()); 
+                answerInputLabelBottom.setText(service.getWordStudy().getCurrentWordAsString()); 
             }         
             answerInput.setText("");
         });
@@ -121,8 +139,13 @@ public class Gui extends Application {
             service.saveAndExit();
             
         });
-        study.getChildren().addAll(answerInputLabel, answerInput, answer, next, correct, definition, saveAndQuit);
-        studyScene = new Scene(study, 500, 500);        
+        
+        buttons.getChildren().add(answer);
+        buttons.getChildren().add(next);
+        buttons.setAlignment(Pos.CENTER);
+        definitionBottom.setAlignment(Pos.CENTER);
+        study.getChildren().addAll(answerInputLabelTop, answerInputLabelBottom, answerInput, buttons, correct, definitionTop, definitionBottom, saveAndQuit);
+        studyScene = new Scene(study, 700, 500);        
         
         //stage        
         primaryStage.setScene(firstScene);  

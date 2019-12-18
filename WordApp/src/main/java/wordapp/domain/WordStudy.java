@@ -66,8 +66,11 @@ public class WordStudy {
     
     public String getCurrentMeaningsAsString() {
         String meanings = String.join(", ", lexicon.getMeanings(index));
-        if (meanings.length() > 100) {
-            meanings = meanings.substring(0, 100);
+        if (meanings.length() > 80) {
+            meanings = meanings.substring(0, 80);
+        }
+        if (meanings.length() == 80) {
+            meanings += "...";
         }
         return meanings;
     }

@@ -1,6 +1,7 @@
 package wordapp.domain;
 
 import java.io.File;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import wordapp.dao.FileLexiconDao;
 import wordapp.dao.FileMounceDictionary;
@@ -10,27 +11,15 @@ public class WordStudyService {
     
     private WordStudy wordStudy;
     private LexiconDao lexiconDao;
-    private String greekWord = "First";
+    private boolean started;
     
     public WordStudyService() {
-        
+        started = false;
     }
         
     public void saveAndExit() {
         wordStudy.quitWordStudy();
         System.exit(0);
-    }
-    
-    public boolean checkAnswer(String answer) {
-        if (wordStudy.isCorrect(answer)) {
-            return true;
-        }
-        return false;
-    }
-    
-    public void setNext() {
-        this.wordStudy.chooseNextWord();   
-        greekWord = this.wordStudy.getCurrentWordAsString();        
     }
     
     public boolean savedExists() {
@@ -62,11 +51,16 @@ public class WordStudyService {
         }    
     }
     
-    public String getGreekWord() {
-        return greekWord;
-    }
-    
     public WordStudy getWordStudy() {
         return wordStudy;
+    }
+    
+    public boolean started() {
+        if (!started) {
+            started = true;
+            return false;
+        } else {
+            return true;
+        }
     }
 }
