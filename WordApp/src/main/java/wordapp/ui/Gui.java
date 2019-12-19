@@ -106,7 +106,7 @@ public class Gui extends Application {
         Label definitionTop = new Label(" ");
         Label definitionBottom = new Label(" ");
         answer.setOnAction(e-> {            
-            String meanings = service.getWordStudy().getCurrentMeaningsAsString();
+            String meanings = service.getWordStudy().getCurrentMeanings();
             String spelling = "";
             if (service.getWordStudy().isCorrect(answerInput.getText())) {   
                 if (service.getWordStudy().spellingMistake()) {
@@ -118,7 +118,7 @@ public class Gui extends Application {
                 correct.setText("Wrong answer");  
                 definitionBottom.setText(meanings);
             }              
-            definitionTop.setText("Definition of the word: " + service.getWordStudy().getCurrentWordAsString());                
+            definitionTop.setText("Definition of the word: " + service.getWordStudy().getCurrentWord());                
             answerInput.setText("");
         });
         next.setOnAction(e-> {            
@@ -127,10 +127,10 @@ public class Gui extends Application {
             correct.setText("");
             definitionTop.setText(" ");
             definitionBottom.setText(" ");
-            if (service.getWordStudy().getCurrentWordAsString() == null) {
+            if (service.getWordStudy().getCurrentWord() == null) {
                 answerInputLabelTop.setText("You have studied all the words!");
             } else {
-                answerInputLabelBottom.setText(service.getWordStudy().getCurrentWordAsString()); 
+                answerInputLabelBottom.setText(service.getWordStudy().getCurrentWord()); 
             }         
             answerInput.setText("");
         });
