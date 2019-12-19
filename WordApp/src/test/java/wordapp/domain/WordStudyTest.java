@@ -46,7 +46,7 @@ public class WordStudyTest {
         }
     }
     public void returnCurrentMeaningsAsStringReturnsMax100Characters() {
-        assertTrue(study.getCurrentMeaningsAsString().length()<=100);
+        assertTrue(study.getCurrentMeanings().length()<=100);
     }
 
 }
