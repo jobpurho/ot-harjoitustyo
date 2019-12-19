@@ -4,9 +4,7 @@ import org.apache.commons.text.similarity.LevenshteinDistance;
 
 public class StringComparison {
     
-    private boolean spellingMistake;
-    private boolean verb;
-    private boolean noun;
+    private boolean different;
     
     private LevenshteinDistance lDistance;
     
@@ -15,85 +13,78 @@ public class StringComparison {
     }
 
     /**
-     * Method uses class org.apache.commons.text.similarity.LevenshteinDistance to count the edit distance of the two strings
+     * Method compare the answer with correct options.
+     * If strings without article match, or edit distance is small, return value is true.
+     * If edit distance is used, spellingMistake is set true.
      * 
-     * @param answerString
+     * @param answerCopy
      * @param correctStrings
      */      
-    public boolean isSimilarEnough(String answerString, String[] correctStrings) {
-        noun = false;
-        verb = false;
-        spellingMistake = false;
-        for (String correctString:correctStrings) {
-            if (correctString.split(" ").length > 1) {
-                if (correctString.split(" ")[0].matches("(an|a|the)")) {
-                    noun = true;
-                } else if (correctString.split(" ")[0].equals("to")) {
-                    verb = true;
-                }
-            }
-            if (similarPreSkipped(answerString, correctString)) {
-                return true;
-            } 
-            if (answerString.length() > 4 && lDistance.apply(answerString, correctString) < 3) {
-                spellingMistake = true;
-                return true;
-            }
-        }
-        return false;
-    }    
-    
-    boolean similarPreSkipped(String answerString, String correctString) {
-        String answerStringLower = answerString.toLowerCase();
-        String correctStringLower = correctString.toLowerCase();
-        if (answerStringLower.equals(correctStringLower)) {
+    public boolean isSimilarEnough(String answerString, String correctString) {
+        String answerCopy = answerString.toLowerCase();
+        String correctCopy = correctString.toLowerCase();
+        different = false;        
+        String correctNoArticle = removeArticle(correctCopy);
+        String answerNoArticle = removeArticle(answerCopy);
+        String answerNoFirst= removeFirst(answerCopy);
+        if (correctNoArticle.equals(answerNoArticle)) {
             return true;
         }
-        if (skipPreEquals(answerStringLower, correctStringLower) || skipPreEquals(correctStringLower, answerStringLower)) {
-            checkSpelling(answerStringLower, correctStringLower);
+        different = true;        
+        if (editDistanceIsSmall(answerCopy, correctCopy)) {
+            return true;
+        } else if (editDistanceIsSmall(correctNoArticle, answerCopy)) {
+            return true;
+        } else if (editDistanceIsSmall(correctNoArticle, answerNoFirst)) {
+            return true;
+        }  
+        return false;
+    }  
+
+     /**
+     * Method removes article or preposition "to" from the beginning of the word
+     * 
+     * @param word input string
+     */     
+    String removeArticle(String word) {
+        if (word.split(" ").length>0) {
+            if (word.split(" ")[0].matches("(an|a|the|to)")) {
+                word = word.substring(word.indexOf(" ")+1,word.length());
+            }
+        }
+        return word;
+    }
+
+     /**
+     * Method removes any first token of a string
+     * 
+     * @param word input string
+     */     
+    String removeFirst(String word) {
+        if (word.split(" ").length>0) {
+            word = word.substring(word.indexOf(" ")+1,word.length());
+        }
+        return word;
+    }
+
+    
+    public boolean different() {
+        return different;
+    }
+    
+    /**
+    * For comparison it uses method similarPreSkipped and a class org.apache.commons.text.similarity.LevenshteinDistance
+    * 
+    * @param string1
+    * @param string2
+    */
+    public boolean editDistanceIsSmall(String string1, String string2) {
+        int distance = lDistance.apply(string1, string2);
+
+        if (string1.length() > 4 && distance < 3) {
             return true;
         }
+        
         return false;
-    }
-    
-    //skip an article or preposition in correct string
-    boolean skipPreEquals(String firstString, String secondString) {
-        String[] firstWords = firstString.split(" ");
-        String[] secondWords = secondString.split(" ");
-        int a = secondString.indexOf(" ") + 1;
-        int b = secondString.length();
-        int c = firstString.indexOf(" ") + 1;
-        int d = firstString.length();
-        if (secondWords.length > 1 && firstWords.length > 1) {
-            if (secondString.substring(a, b).equals(firstString.substring(c, d))) {         
-                return true;
-            }            
-        }
-        if (secondWords.length > 1 && secondWords[0].length() <= 3 && secondWords[1].length() >= 2) {
-            if (secondString.substring(a, b).equals(firstString)) { 
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    void checkSpelling(String answer, String correct) {
-        if (answer.split(" ").length < 2) {
-            spellingMistake = false;
-        } else if (verb && !noun && !answer.split(" ")[0].equals("to")) {
-            spellingMistake = true;
-        } else if (!verb && noun && answer.split(" ")[0].length() <= 3) {
-            if (!answer.split(" ")[0].matches("(the|an|a)")) {
-                spellingMistake = true;
-            } else if (answer.split(" ")[0].equals("an") && !answer.split(" ")[1].substring(0, 1).matches("[aeiouAEIOU]")) {
-                spellingMistake = true;
-            } else if (answer.split(" ")[0].equals("a") && answer.split(" ")[1].substring(0, 1).matches("[aeiouAEIOU]")) {
-                spellingMistake = true;
-            }
-        }
-    }
-    
-    public boolean spellingMistake() {
-        return spellingMistake;
     }
 }

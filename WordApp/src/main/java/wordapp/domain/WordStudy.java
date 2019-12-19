@@ -11,6 +11,9 @@ public class WordStudy {
     private StringComparison comparison;
     private LexiconDao ld;
     private boolean answered = false;
+    private boolean spellingMistake = false;
+    private String currentWord;
+    private String currentMeanings;
     
     public WordStudy(LexiconDao ld) {
         this.ld = ld;
@@ -21,23 +24,35 @@ public class WordStudy {
     
     public void chooseNextWord() {
         answered = false;
+        spellingMistake = true;
         if (!lexicon.isEmpty()) {
             index = random.nextInt(lexicon.getKeys().size());        
         }
+        setCurrentWord();
+        setCurrentMeanings();
+        
     }
     
     public boolean isCorrect(String answer) {
         answered = true;
+        boolean correct = false;
         String[] meanings = lexicon.getMeanings(index);
-        if (comparison.isSimilarEnough(answer, meanings)) {
-            lexicon.removeWord(index);
-            return true;
+        for (String meaning: meanings) {
+            if (comparison.isSimilarEnough(answer, meaning)) {
+                correct = true;
+                if (!comparison.different()) {
+                    spellingMistake = false;
+                }
+            }            
         }
-        return false;
+        if (correct) {
+            lexicon.removeWord(index);
+        }
+        return correct;
     }
     
     public boolean spellingMistake() {
-        return comparison.spellingMistake();
+        return spellingMistake;
     }
 
     public void quitWordStudy() {
@@ -56,22 +71,29 @@ public class WordStudy {
     public int getIndex() {
         return index;
     }
-    
-    public String getCurrentWordAsString() {
+
+    public void setCurrentWord() {
         if (lexicon.isEmpty()) {
-            return null;
+            return;
         }
-        return lexicon.getWord(index);
-    }    
+        currentWord = lexicon.getWord(index);
+    } 
     
-    public String getCurrentMeaningsAsString() {
-        String meanings = String.join(", ", lexicon.getMeanings(index));
-        if (meanings.length() > 80) {
-            meanings = meanings.substring(0, 80);
+    public String getCurrentWord() {
+        return currentWord;
+    }    
+
+    public void setCurrentMeanings() {
+        currentMeanings = String.join(", ", lexicon.getMeanings(index));
+        if (currentMeanings.length() > 80) {
+            currentMeanings = currentMeanings.substring(0, 80);
         }
-        if (meanings.length() == 80) {
-            meanings += "...";
+        if (currentMeanings.length() == 80) {
+            currentMeanings += "...";
         }
-        return meanings;
+    }
+    
+    public String getCurrentMeanings() {
+        return currentMeanings;
     }
 }
