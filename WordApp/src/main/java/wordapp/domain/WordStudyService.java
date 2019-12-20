@@ -7,6 +7,11 @@ import wordapp.dao.FileLexiconDao;
 import wordapp.dao.FileMounceDictionary;
 import wordapp.dao.LexiconDao;
 
+/**
+ * This class contains methods for user interface
+ *
+ */
+
 public class WordStudyService {
     
     private WordStudy wordStudy;
@@ -57,7 +62,9 @@ public class WordStudyService {
     
     public boolean started() {
         if (!started) {
-            started = true;
+            if (wordStudy!=null) {
+                started = true;
+            }            
             return false;
         } else {
             return true;

@@ -7,12 +7,22 @@ import java.util.*;
 import java.io.*;
 import wordapp.dao.*;
 
+/**
+ * 
+ * This class reads saved study from file
+ */
+
 public class FileLexiconDao implements LexiconDao {
 
     private String file;
     private HashMap fileContent;
     private String savedFileName;
     
+    /**
+     * 
+     * Constructors calls readSaved() method and saves the content to the HashMap
+     * @param savedFileName file name
+     */
     public FileLexiconDao(String savedFileName) {
         this.savedFileName = savedFileName;
         if (new File(savedFileName).exists()) {
@@ -20,6 +30,10 @@ public class FileLexiconDao implements LexiconDao {
         }        
     }
     
+    /**
+     * Method reads files and returns content
+     * @return
+     */
     private HashMap readSaved() {
         try {
             FileInputStream inputFile = new FileInputStream(savedFileName);
@@ -30,7 +44,9 @@ public class FileLexiconDao implements LexiconDao {
         }
         return null;
     }
-
+    /**
+     * Methods saves content to file
+     */
     public void save() {
         try {
             FileOutputStream outputFile = new FileOutputStream(savedFileName);
@@ -40,10 +56,12 @@ public class FileLexiconDao implements LexiconDao {
             
         } catch (Exception e) {
             System.out.println(e);
-        }
-        
+        }        
     }
     
+    /**
+     * Methods removes a file
+     */    
     public void removeFile() {
         File file = new File(savedFileName);
         file.delete();

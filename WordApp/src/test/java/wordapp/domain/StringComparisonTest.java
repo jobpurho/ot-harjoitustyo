@@ -47,6 +47,18 @@ public class StringComparisonTest {
         assertTrue(!comp.isSimilarEnough("immediately", "immadietly"));        
     }    
     
+    @Test
+    public void removeArticleReturnsCorrectStrings() {
+        assertEquals(comp.removeArticle("the word"), "word");
+        assertEquals(comp.removeArticle("a word"), "word");
+        assertEquals(comp.removeArticle("an apple"), "apple");
+        assertEquals(comp.removeArticle("to think"), "think");
+    }
+
+    @Test
+    public void removeFirstReturnsCorrectStrings() {
+        assertEquals(comp.removeFirst("this word"), "word");
+    }    
 
     @ Test
     public void isSimilarEnoughIfArticleOrTo() {

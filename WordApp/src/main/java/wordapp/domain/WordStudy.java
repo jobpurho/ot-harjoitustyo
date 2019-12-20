@@ -3,6 +3,12 @@ package wordapp.domain;
 import wordapp.dao.*;
 import java.util.*;
 
+/**
+ * This class contains domain logic of WordStudy.
+ * It uses Lexicon and StringComparison objects.
+ * 
+ */
+
 public class WordStudy {
     
     private Random random;
@@ -28,8 +34,8 @@ public class WordStudy {
         if (!lexicon.isEmpty()) {
             index = random.nextInt(lexicon.getKeys().size());        
         }
-        setCurrentWord();
-        setCurrentMeanings();
+        updateCurrentWord();
+        updateCurrentMeanings();
         
     }
     
@@ -72,7 +78,7 @@ public class WordStudy {
         return index;
     }
 
-    public void setCurrentWord() {
+    public void updateCurrentWord() {
         if (lexicon.isEmpty()) {
             return;
         }
@@ -83,7 +89,7 @@ public class WordStudy {
         return currentWord;
     }    
 
-    public void setCurrentMeanings() {
+    public void updateCurrentMeanings() {
         currentMeanings = String.join(", ", lexicon.getMeanings(index));
         if (currentMeanings.length() > 80) {
             currentMeanings = currentMeanings.substring(0, 80);
@@ -95,5 +101,9 @@ public class WordStudy {
     
     public String getCurrentMeanings() {
         return currentMeanings;
+    }
+    
+    public Lexicon getLexicon() {
+        return lexicon;
     }
 }

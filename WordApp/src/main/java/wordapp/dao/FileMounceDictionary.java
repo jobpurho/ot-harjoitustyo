@@ -5,6 +5,11 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.io.*;
 
+/**
+ * This class reads mounce dictipnary from text file
+ * 
+ */
+
 public class FileMounceDictionary implements OriginalLexicon {
 
     private TreeMap<Integer, ArrayList<String>> lines;
