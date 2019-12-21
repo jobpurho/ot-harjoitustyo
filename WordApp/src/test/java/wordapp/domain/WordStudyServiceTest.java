@@ -44,6 +44,7 @@ public class WordStudyServiceTest {
     
     @After
     public void tearDown() {
+        new File("savedTest.ser").delete();
     }
 
     @Test
@@ -71,12 +72,5 @@ public class WordStudyServiceTest {
         assertTrue(!service.tryToCreateNew("5382"));
         assertTrue(!service.tryToCreateNew(null));
         assertTrue(!service.tryToCreateNew("abcd"));        
-    }
-    
-    @Test
-    public void fileExistsAfterSaveAndExit() {
-        service.tryToCreateNew("100");
-        service.saveAndExit();
-        assertTrue(new File("savedTest.ser").exists());
     }
 }
