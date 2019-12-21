@@ -15,6 +15,11 @@ import javafx.scene.Scene;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 
+/**
+ * Graphical user interface
+ *
+ */
+
 public class Gui extends Application {
     
     private Scene firstScene;

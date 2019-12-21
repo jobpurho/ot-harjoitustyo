@@ -6,7 +6,7 @@ import java.util.*;
 import java.io.*;
 
 /**
- * This class reads mounce dictipnary from text file
+ * This class reads Mounce's dictionary from text file
  * 
  */
 

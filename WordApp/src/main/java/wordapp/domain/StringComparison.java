@@ -26,7 +26,7 @@ public class StringComparison {
         different = false;        
         String correctNoArticle = removeArticle(correctCopy);
         String answerNoArticle = removeArticle(answerCopy);
-        String answerNoFirst= removeFirst(answerCopy);
+        String answerNoFirst = removeFirst(answerCopy);
         if (correctNoArticle.equals(answerNoArticle)) {
             return true;
         }
@@ -47,9 +47,9 @@ public class StringComparison {
      * @param word input string
      */     
     String removeArticle(String word) {
-        if (word.split(" ").length>0) {
+        if (word.split(" ").length > 0) {
             if (word.split(" ")[0].matches("(an|a|the|to)")) {
-                word = word.substring(word.indexOf(" ")+1,word.length());
+                word = word.substring(word.indexOf(" ") + 1, word.length());
             }
         }
         return word;
@@ -61,8 +61,8 @@ public class StringComparison {
      * @param word input string
      */     
     String removeFirst(String word) {
-        if (word.split(" ").length>0) {
-            word = word.substring(word.indexOf(" ")+1,word.length());
+        if (word.split(" ").length > 0) {
+            word = word.substring(word.indexOf(" ") + 1, word.length());
         }
         return word;
     }

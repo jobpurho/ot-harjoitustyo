@@ -11,12 +11,16 @@ import static org.junit.Assert.*;
 
 public class FileLexiconDaoTest {
     
-    FileLexiconDao fldao;
+    FileLexiconDao fldaoA;
+    FileLexiconDao fldaoB;
     
     public FileLexiconDaoTest() {
-        fldao = new FileLexiconDao("test.ser");
         OriginalLexicon lexicon = new FileMounceDictionary("dictionary.txt");
-        fldao.setFileContent(lexicon.getFileContent());
+        
+        fldaoA = new FileLexiconDao("test.ser");
+        fldaoA.setFileContent(lexicon.getFileContent());
+        fldaoA.save();
+        fldaoB = new FileLexiconDao("test.ser");
     }
     
     @BeforeClass
@@ -33,6 +37,17 @@ public class FileLexiconDaoTest {
     
     @After
     public void tearDown() {
+    }
+    
+    @Test
+    public void fileContentIsCorrectWhenSavedAndLoaded() {     
+        assertEquals(fldaoA.returnFileContent().size(),fldaoB.returnFileContent().size());
+    }
+
+    @Test
+    public void fileDoesNotExistAfterRemoving() {    
+        fldaoA.removeFile();
+        assertTrue(!new File("test.ser").exists());
     }
     
 }

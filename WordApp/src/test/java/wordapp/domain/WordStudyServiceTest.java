@@ -1,5 +1,6 @@
 package wordapp.domain;
 
+import java.io.File;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -17,11 +18,12 @@ public class WordStudyServiceTest {
     
     public WordStudyServiceTest() {
         service = new WordStudyService();
-        LexiconDao lexDao = new FileLexiconDao("saved.ser");
+        LexiconDao lexDao = new FileLexiconDao("savedTest.ser");
         FileMounceDictionary mounce = new FileMounceDictionary("dictionary.txt");
         mounce.tryToFilterTopWords(100);     
         lexDao.setFileContent(mounce.getFileContent());
-        study = new WordStudy(lexDao);
+        study = new WordStudy(lexDao);        
+        service.setSavedFile("savedTest.ser");
         
         if (!service.savedExists()) {
             lexDao.save();
@@ -69,5 +71,12 @@ public class WordStudyServiceTest {
         assertTrue(!service.tryToCreateNew("5382"));
         assertTrue(!service.tryToCreateNew(null));
         assertTrue(!service.tryToCreateNew("abcd"));        
+    }
+    
+    @Test
+    public void fileExistsAfterSaveAndExit() {
+        service.tryToCreateNew("100");
+        service.saveAndExit();
+        assertTrue(new File("savedTest.ser").exists());
     }
 }

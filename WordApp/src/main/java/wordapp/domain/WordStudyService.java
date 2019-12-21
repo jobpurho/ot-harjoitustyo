@@ -17,9 +17,11 @@ public class WordStudyService {
     private WordStudy wordStudy;
     private LexiconDao lexiconDao;
     private boolean started;
+    private String savedFileName;
     
     public WordStudyService() {
         started = false;
+        savedFileName = "saved.ser";
     }
         
     public void saveAndExit() {
@@ -28,21 +30,21 @@ public class WordStudyService {
     }
     
     public boolean savedExists() {
-        if (new File("saved.ser").exists()) {
+        if (new File(savedFileName).exists()) {
             return true;
         }
         return false;
     }
     
     public void load() {
-        this.lexiconDao = new FileLexiconDao("saved.ser");
+        this.lexiconDao = new FileLexiconDao(savedFileName);
         this.wordStudy = new WordStudy(this.lexiconDao);
     }
     
     public boolean tryToCreateNew(String input) {
         try {
             int number = Integer.parseInt(input);
-            this.lexiconDao = new FileLexiconDao("saved.ser");
+            this.lexiconDao = new FileLexiconDao(savedFileName);
             FileMounceDictionary mounce = new FileMounceDictionary("dictionary.txt");
             if (!mounce.tryToFilterTopWords(number)) {
                 return false;
@@ -62,12 +64,16 @@ public class WordStudyService {
     
     public boolean started() {
         if (!started) {
-            if (wordStudy!=null) {
+            if (wordStudy != null) {
                 started = true;
             }            
             return false;
         } else {
             return true;
         }
+    }
+    
+    public void setSavedFile(String fileName) {
+        savedFileName = fileName;
     }
 }

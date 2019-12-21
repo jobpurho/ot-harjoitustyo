@@ -5,7 +5,7 @@ import java.util.*;
 
 /**
  * This class contains domain logic of WordStudy.
- * It uses Lexicon and StringComparison objects.
+ * It uses Lexicon and StringComparison classes.
  * 
  */
 

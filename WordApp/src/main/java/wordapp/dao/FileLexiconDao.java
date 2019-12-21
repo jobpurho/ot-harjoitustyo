@@ -34,14 +34,12 @@ public class FileLexiconDao implements LexiconDao {
      * Method reads files and returns content
      * @return
      */
-    private HashMap readSaved() {
+    public HashMap readSaved() {
         try {
             FileInputStream inputFile = new FileInputStream(savedFileName);
             ObjectInputStream input = new ObjectInputStream(inputFile);  
             return (HashMap) input.readObject();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+        } catch (Exception e) { }
         return null;
     }
     /**
@@ -50,13 +48,9 @@ public class FileLexiconDao implements LexiconDao {
     public void save() {
         try {
             FileOutputStream outputFile = new FileOutputStream(savedFileName);
-            ObjectOutputStream output = new ObjectOutputStream(outputFile);
-            
-            output.writeObject(fileContent);
-            
-        } catch (Exception e) {
-            System.out.println(e);
-        }        
+            ObjectOutputStream output = new ObjectOutputStream(outputFile);            
+            output.writeObject(fileContent);            
+        } catch (Exception e) { }        
     }
     
     /**
