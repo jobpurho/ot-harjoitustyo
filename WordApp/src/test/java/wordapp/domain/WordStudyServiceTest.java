@@ -53,12 +53,6 @@ public class WordStudyServiceTest {
         assertTrue(!service.started());
         assertTrue(!service.started());
     }
-
-    @Test
-    public void wordStudyIsNotNullAfterLoading() {        
-        service.load();
-        assertNotNull(service.getWordStudy());
-    }
     
     @Test
     public void tryToCreateNewReturnsTrueWithCorrectInput() {
