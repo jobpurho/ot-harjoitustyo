@@ -42,12 +42,5 @@ public class FileLexiconDaoTest {
     @Test
     public void fileContentIsCorrectWhenSavedAndLoaded() {     
         assertEquals(fldaoA.returnFileContent().size(),fldaoB.returnFileContent().size());
-    }
-
-    @Test
-    public void fileDoesNotExistAfterRemoving() {    
-        fldaoA.removeFile();
-        assertTrue(!new File("test.ser").exists());
-    }
-    
+    }  
 }
