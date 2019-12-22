@@ -12,4 +12,7 @@
 | 9.12. |7     | tiedoston lukijan ja merkkijonovertailun parantaminen |
 | 15.12.|1     | käyttöliittymän parempi eriyttäminen sovelluslogiikasta |
 | 16.12.|2     | arkkitehtuurikuvauksen päivitys |
-| yht   |51    |   |
+| 19.12.|4     | sovelluslogiikan päivitys |
+| 20.12.|5     | testaus ja sovelluslogiikan päivitys |
+| 21.12.|2     | testaus |
+| yht   |62    |   |
