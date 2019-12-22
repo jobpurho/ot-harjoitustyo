@@ -16,15 +16,16 @@ Sovelluksella on vain yhdenlaisia käyttäjiä.
 ## Jatkokehitys
 
 Perusversion jälkeen lisätään seuraavat toiminnallisuudet ajan antamissa rajoissa:
-- Graafinen käyttöliittymä
-- Sanastona on laajempi kreikka-englanti -sanasto, joka on ladattu ja muokattu täältä: https://github.com/billmounce/dictionary/blob/master/dictionary.txt
+- Graafinen käyttöliittymä (tehty)
+- Sanastona on laajempi kreikka-englanti -sanasto, joka on ladattu täältä: https://github.com/billmounce/dictionary/blob/master/dictionary.txt (tehty)
+- Käyttäjä voi valita opiskeltavan sanaston laajuuden (yllä mainitussa sanastossa on kerrottu sanojen esiintyvyys tietyssä korpuksessa, mitä käytetään rajaukseen). (tehty)
+- Vastaus voi olla oikein, vaikka siinä olisi pieni kirjoitusvirhe. (tehty)
+
+## Pois jääneet ominaisuudet
+Nämä ominaisuudet jätettiin pois lopullisesta sovelluksesta:
 - Oppimisen tehostamiseksi sanaa kysytään uudestaan myöhemmin, vaikka vastaus olisi oikein.
 - Vastauksen nopeus vaikuttaa siihen, kuinka monta kertaa kysymykseen pitää vastata uudestaan oikein ennen kuin sana poistuu kysyttävistä sanoista.
-- Käyttäjä voi valita opiskeltavan sanaston laajuuden (yllä mainitussa sanastossa on kerrottu sanojen esiintyvyys tietyssä korpuksessa, mitä käytetään rajaukseen).
 - Sanojen yhteyteen voi tallentaa vihjeitä.
-- Vastaus voi olla oikein, vaikka siinä olisi pieni kirjoitusvirhe.
-
-Seuraavia muutoksia voidaan tehdään sellaisissa rajoissa, että tietokantatauluja tai tiedostoja ei tule liikaa:
 - Vaihtoehtoisiksi opiskeltaviksi kieliksi lisätään Heprea ja Latina
 - Käyttäjä voi luoda omia sanastoja, joihon voi kirjoittaa sanoja ja niiden mahdollisia käännöksiä
 - Sanaston voi lisätä CSV-tiedostosta (se käyttäjän on täytynyt tehdä jotenkin muuten)
