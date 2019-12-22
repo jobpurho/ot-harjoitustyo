@@ -4,8 +4,8 @@ import wordapp.dao.*;
 import java.util.*;
 
 /**
- * This class contains domain logic of WordStudy.
- * It uses Lexicon and StringComparison classes.
+ * This class contains logic of WordStudy game.
+ * Class uses Lexicon and StringComparison classes.
  * 
  */
 
@@ -28,6 +28,9 @@ public class WordStudy {
         comparison = new StringComparison();
     }
     
+    /**
+     * Methods chooses a next word from lexicon.
+     */
     public void chooseNextWord() {
         answered = false;
         spellingMistake = true;
@@ -38,7 +41,12 @@ public class WordStudy {
         updateCurrentMeanings();
         
     }
-    
+
+    /**
+     * Methods checks if answer is correct when compared to all correct meanings.
+     * It uses StringComparison class to compare the answer and correct meaning.
+     * @return boolean
+     */    
     public boolean isCorrect(String answer) {
         answered = true;
         boolean correct = false;
@@ -57,10 +65,15 @@ public class WordStudy {
         return correct;
     }
     
+
     public boolean spellingMistake() {
         return spellingMistake;
     }
 
+    /**
+     * Method saves remaining words to file or removes a file if lexicon is empty.
+     * @return 
+     */
     public void quitWordStudy() {
         if (lexicon.isEmpty()) {
             ld.removeFile();

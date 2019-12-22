@@ -8,7 +8,7 @@ import wordapp.dao.FileMounceDictionary;
 import wordapp.dao.LexiconDao;
 
 /**
- * This class contains methods for user interface
+ * Responsibility of the class is to create an instance of WordStudy and to manage the necessary actions before quit.
  *
  */
 
@@ -19,28 +19,43 @@ public class WordStudyService {
     private boolean started;
     private String savedFileName;
     
+
     public WordStudyService() {
         started = false;
         savedFileName = "saved.ser";
     }
-        
+
+    /**
+     * Method quits instance of the WordStudy and closes the app.
+     */    
     public void saveAndExit() {
         wordStudy.quitWordStudy();
         System.exit(0);
     }
     
+    /**
+     * Method checks if saved file exists.
+     * @return boolean
+     */
     public boolean savedExists() {
         if (new File(savedFileName).exists()) {
             return true;
         }
         return false;
     }
-    
+
+    /**
+     * Method loads the file and set the content to new instance of WordStudy.
+     */    
     public void load() {
         this.lexiconDao = new FileLexiconDao(savedFileName);
         this.wordStudy = new WordStudy(this.lexiconDao);
     }
-    
+
+    /**
+     * Method tries to create new WordStudy from the given range.
+     * @param input Range of words as a string.
+     */     
     public boolean tryToCreateNew(String input) {
         try {
             int number = Integer.parseInt(input);
@@ -62,6 +77,10 @@ public class WordStudyService {
         return wordStudy;
     }
     
+    /**
+     * Method checks if current WordStudy has started.
+     * @return boolean
+     */
     public boolean started() {
         if (!started) {
             if (wordStudy != null) {
