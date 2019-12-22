@@ -43,7 +43,7 @@
                 <configuration>
                     <excludes>
                         <exclude>wordapp/ui/*</exclude>
-                        <exclude>wordapp/Main.java</exclude>
+                        <exclude>wordapp/*</exclude>
                     </excludes>
                 </configuration>
                 <executions>
