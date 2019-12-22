@@ -18,6 +18,8 @@ Sovellus mahdollistaa muinaiskreikan sanaston opiskelun. Maven-projekti löytyy 
 
 [Käyttöohje](https://github.com/jobpurho/ot-harjoitustyo/tree/master/dokumentointi/kayttoohje.md)
 
+[Testausdokumentti](https://github.com/jobpurho/ot-harjoitustyo/tree/master/dokumentointi/testaus.md)
+
 ## Releaset
 
 [viikko5](https://github.com/jobpurho/ot-harjoitustyo/releases/tag/viikko5)
