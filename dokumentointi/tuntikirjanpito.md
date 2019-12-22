@@ -15,4 +15,5 @@
 | 19.12.|4     | sovelluslogiikan päivitys |
 | 20.12.|5     | testaus ja sovelluslogiikan päivitys |
 | 21.12.|2     | testaus |
-| yht   |62    |   |
+| 22.12.|1     | dokumentointia |
+| yht   |63    |   |
