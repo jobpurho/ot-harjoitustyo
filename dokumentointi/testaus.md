@@ -14,7 +14,7 @@ Kaikkia domain -luokkia testataan integraatiotesteillä. Lisäksi dao -luokkia F
 
 Testien rivikattavuus on 95% ja haarautumiskattavuus 89%.
 
-<img src="https://raw.githubusercontent.com/jobpurho/ot-harjoitustyo/master/dokumentointi/kuvat/sovelluslogiikka.png">
+<img src="https://raw.githubusercontent.com/jobpurho/ot-harjoitustyo/master/dokumentointi/kuvat/testauskattavuus.png">
 
 ## Järjestelmätestaus
 
