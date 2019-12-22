@@ -26,6 +26,9 @@ Sovellus mahdollistaa muinaiskreikan sanaston opiskelun. Maven-projekti löytyy 
 
 [viikko6](https://github.com/jobpurho/ot-harjoitustyo/releases/tag/viikko6)
 
+[loppupalautus](https://github.com/jobpurho/ot-harjoitustyo/releases/tag/loppupalautus)
+
+
 ## Komentorivitoiminnot
 
 ### Ohjelman suoritus
