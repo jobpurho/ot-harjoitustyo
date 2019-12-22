@@ -1,5 +1,6 @@
 # Vaatimusmäärittely
 
+Toteutetut ominaisuudet ovat otsikoiden "Perusversion toiminnallisuus" ja "Jatkokehitys" alla. Pois jätetyt ominaisuudet on lueteltu lopussa.
 
 ## Sovelluksen tarkoitus
 Sovellus on tarkoitettu teologeille klassisten kielten sanaston opiskelua varten. Sovellus antaa opiskeltavan kielen sanan ja käyttäjä yrittää kirjoittaa oikean merkityksen. Opiskeltava kieli on perusversiossa muinaiskreikkaa ja vastaukset ovat englantia. Perusversiossa sanastossa on vain muutamia sanoja, jotta ohjelman toiminnan kokeilu olisi helppoa.
@@ -14,8 +15,6 @@ Sovelluksella on vain yhdenlaisia käyttäjiä.
 - Perusversiossa on tekstikäyttöliittymä. (tehty)
 
 ## Jatkokehitys
-
-Perusversion jälkeen lisätään seuraavat toiminnallisuudet ajan antamissa rajoissa:
 - Graafinen käyttöliittymä (tehty)
 - Sanastona on laajempi kreikka-englanti -sanasto, joka on ladattu täältä: https://github.com/billmounce/dictionary/blob/master/dictionary.txt (tehty)
 - Käyttäjä voi valita opiskeltavan sanaston laajuuden (yllä mainitussa sanastossa on kerrottu sanojen esiintyvyys tietyssä korpuksessa, mitä käytetään rajaukseen). (tehty)
